@@ -169,6 +169,7 @@
     <Compile Include="Contexto\MySqlHistoryContext.cs" />
     <Compile Include="Contexto\MySqlInitializer.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MapaController.cs" />
     <Compile Include="Controllers\SurdoController.cs" />
     <Compile Include="EntidadeConfig\MapasConfig.cs" />
     <Compile Include="EntidadeConfig\MapaSurdoConfig.cs" />
@@ -179,9 +180,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611170243289_Inicial2.cs" />
-    <Compile Include="Migrations\201611170243289_Inicial2.Designer.cs">
-      <DependentUpon>201611170243289_Inicial2.cs</DependentUpon>
+    <Compile Include="Migrations\201611172013112_Initial.cs" />
+    <Compile Include="Migrations\201611172013112_Initial.Designer.cs">
+      <DependentUpon>201611172013112_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -228,6 +229,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Surdo\Index.cshtml" />
     <Content Include="Views\Surdo\Create.cshtml" />
+    <Content Include="Views\Mapa\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -242,8 +244,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611170243289_Inicial2.resx">
-      <DependentUpon>201611170243289_Inicial2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611172013112_Initial.resx">
+      <DependentUpon>201611172013112_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
