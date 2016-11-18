@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<LsMapasNet.Entidade.Mapas>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "LISTA DE MAPAS";
 }
 
-<h2>Index</h2>
+<h2>LISTA DE MAPAS</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Novo", "Create")
 </p>
 <table class="table">
     <tr>
@@ -16,15 +16,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.obs)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.centromapa_lat)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.centromapa_long)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.id_surdo)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.zoommapa)
@@ -41,21 +32,11 @@
             @Html.DisplayFor(modelItem => item.obs)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.centromapa_lat)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.centromapa_long)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.id_surdo)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.zoommapa)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Imprimir", "ImpressaoMapa", new { id = item.id })
         </td>
     </tr>
 }

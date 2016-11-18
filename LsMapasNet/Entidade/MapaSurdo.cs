@@ -9,8 +9,8 @@ namespace LsMapasNet.Entidade
     {
         public int id { get; set; }
         public int idMapa{get;set;}
-        public Mapas id_mapa { get; set; }
+        public virtual Mapas id_mapa { get; set; }
         public int idSurdo { get; set; }
-        public Surdo id_surdo { get; set; }
+        public virtual Surdo id_surdo { get; set; }
     }
 }

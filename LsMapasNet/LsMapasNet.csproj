@@ -230,6 +230,7 @@
     <Content Include="Views\Surdo\Index.cshtml" />
     <Content Include="Views\Surdo\Create.cshtml" />
     <Content Include="Views\Mapa\Index.cshtml" />
+    <Content Include="Views\Mapa\ImpressaoMapa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

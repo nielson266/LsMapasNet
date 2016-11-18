@@ -14,8 +14,9 @@ namespace LsMapasNet.Controllers
         // GET: Mapa
         public ActionResult Index()
         {
-            CarregaMapaScript();
-            
+            //CarregaMapaScript();
+            //CarregaMapaSurdoScript();
+
             return View(dbMpContex.Mapas.ToList());
         }
 
@@ -75,6 +76,24 @@ namespace LsMapasNet.Controllers
             return View();
         }
 
+        public ActionResult ImpressaoMapa(int id)
+        {
+            
+            var DtListMapa = dbMpContex.MapaSurdo.Where(m => m.idMapa == id).ToList();
+
+            ViewBag.idMapa = id;
+            ViewBag.Mapa = DtListMapa[0].id_mapa.desc_mapa;
+
+
+            return View(DtListMapa);
+        }
+
+
+        public ActionResult imprimir_listalatlongmapa(int id)
+        {
+            return View();
+        }
+
         // POST: Mapa/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
@@ -95,7 +114,9 @@ namespace LsMapasNet.Controllers
         {
             int counter = 0;
             string line;
-            System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Users\dp\Documents\Sistemas\LsMapasNet\LsMapasNet\arquivos\scriptMapa.txt");
+            //System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Users\dp\Documents\Sistemas\LsMapasNet\LsMapasNet\arquivos\scriptMapa.txt");
+
+            System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Sistemas\LsMapasNet\LsMapasNet\arquivos\scriptMapa.txt");
 
 
             while ((line = file.ReadLine()) != null)
@@ -115,6 +136,40 @@ namespace LsMapasNet.Controllers
 
                 dbMpContex.Mapas.Add(ObjMapa);
                 dbMpContex.SaveChanges();
+
+                counter++;
+            }
+        }
+
+        void CarregaMapaSurdoScript()
+        {
+            int counter = 0;
+            string line;
+            //System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Users\dp\Documents\Sistemas\LsMapasNet\LsMapasNet\arquivos\scriptMapa.txt");
+
+            System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Sistemas\LsMapasNet\LsMapasNet\arquivos\scriptMapaSurdo.txt");
+
+
+            while ((line = file.ReadLine()) != null)
+            {
+                MapaSurdo ObjMapaSurdo = new MapaSurdo();
+
+                string[] Mapalinha = line.Split('|');
+
+                //ObjMapaSurdo.id = Convert.ToInt32(Mapalinha[0]);
+                ObjMapaSurdo.idMapa = Convert.ToInt32(Mapalinha[1]);
+                ObjMapaSurdo.idSurdo = Convert.ToInt32(Mapalinha[2]);
+
+
+                try
+                {
+                    dbMpContex.MapaSurdo.Add(ObjMapaSurdo);
+                    dbMpContex.SaveChanges();
+                }
+                catch(Exception ex)
+                {
+                    counter++;
+                }
 
                 counter++;
             }

@@ -1,3 +1,4 @@
+|289|VANDER|R. NW OITO|||-37647958|-386378342|ARATURI (JUREMA)|A
 |75|SR LS Caucaia|||7|||CENTRO|T
 |164|Rodrigo |Rua São Joao,217||1|-372733|-3867088|GRILO|A
 |265|janiele|Rua Jose karan, 1749|||-435263|-3932096|CANIDEZINHO|A
@@ -72,9 +73,11 @@
 |188|Telma|Rua Porto Velho, qd  55, bl 4, Ap 203||3|-375430|-3861374|PQ. ALBANO|A
 |167|Liliane|Rua Joaquim Bento Cavalcante, 420||3|-372794|-3865908|GRILO|A
 |163|Tiago|Rua Joaquim Bento Cavalcante, 302|MãeShirley|2|-372851|-3866368|GRILO|A
+|278|Jana|Av. dos Coqueiros, S/N|||0|0|CUMBUCO|A
 |141|Diego e Katia|PEGAR ENDERECO||5|-376548|-3864637|METROPOLE 5|A
 |1|Lucas Yago|Rua Nw vinte e três, bl 17, ap 22a||1|-37650544|-386406146|CONJ. ARATURI|A
 |121|Roberia|Rua São Raimundo, 24||3|-373997|-3871163|JARDIM DO AMOR|A
+|285|Lisandra|Travesa Ponte Nova, 209, Altos|||-37743337|-386248875|MARECHAL RONDON (JUREMA)|A
 |208|Berenice|Rua Jose Rocha Sales, 747||3|-374138|-3865506|AÇUDE|A
 |69|Erialdo|Rua Mirador,492, -377575-3862159|Sabe sinais, Trabalha na Guararapes|1|-377575|-3862159|MARECHAL RONDON (JUREMA)|A
 |110|Elenir|Rua X, 92|||-377575|-3865529|METROPOLE 5|A
@@ -138,8 +141,10 @@
 |29|Janaina|Rua Torreon, 1270 LA -376.083 LO -3.863.224|Entre R. Anhagá x Colibri; Não sabe sinais; Casada; Viciada em drogas;|3|-376083|-3863224|PARQUE POTIRA (JUREMA)|A
 |31|Jarderson|R ua Acapulco, 1947 -3.75536 -38.62943|PUBLICADOR SURDO|0|-375536|-3862943|PARQUE POTIRA (JUREMA)|A
 |191|Jessica --Mudou-se|Rua Contorno Norte,  500, Bloco 6 Ap 104 (Cond Novo pabussu)|Condominio Novo Pabssu|3|-374192|-3866384|PLANALTO CAUCAIA|A
+|279|Mauricio|Av. dos Coqueiros, 1595|||0|0|CUMBUCO|A
 |34|Raquel|Rua Acapulco, 1539|Entre R. Guará x Colibri; |3|-375788|-3862643|PARQUE POTIRA (JUREMA)|A
 |36|Bruna|Rua Jarupary, 1500,|Entre R. Guará x Morelia|4|-375436|-3862425|PARQUE POTIRA (JUREMA)|A
+|286|Antonio Ucho|Rua Nova Granada, 892|||-37752969|-386249547|MARECHAL RONDON (JUREMA)|A
 |128|Reginara|Rua da Liberdade 524|Esquina com rua 114|4|-37401733|-386692004|PE. JULIO MARIA|A
 |39|Raimundo Nonato|Rua Galiente, 2404|Entre R. Catumby x R. Paracatu|1|-375455|-3863177|PARQUE POTIRA (JUREMA)|A
 |193|LUIZ e JORDANIA|RUA SANTA LUZIA, 57||5|-374404|-3867034|PE. JULIO MARIA|A
@@ -155,6 +160,7 @@
 |13|Virna |Rua Canavieira, 671, -377616-3862864|Sabe sinais|3|-377616|-3862864|MARECHAL RONDON (JUREMA)|A
 |14|SEBASTIAO|Rua Canavieira, 230, -3.77107 -38.62433|UMA RUA DEPOIS DO TRILHO PRÓX A FEIRA; ADULTO;|1|-377107|-3862433|MARECHAL RONDON (JUREMA)|A
 |113|Evertony|Rua 3, 3||1|-377365|-3865870|METROPOLE 5 |A
+|287|Casal de Surdo|Rua Colina, 545 B|||-37759439|-386224172|MARECHAL RONDON (JUREMA)|A
 |269|Pedro|Rua Monsenhor Custodio, 1091|||-370951|-3866323|MESTRE ANTONIO|A
 |54|Jonatas|Rped E 21, 113, -377159-3863220|Sabe sinais, oralizado, estuda a tarde, Irmã Jamile criança|1|-377159|-3863220|RES. ARATURI (JUREMA)|A
 |22|Kassiandra|Rua A, 63,  -3.768002 -38.6398807|Sabe sinais, tem irmã ouvinte gêmea: Kessiandra, Mãe Katy, Entre RNw 23 x Av. Central Oeste|4|-376553|-3863630|ARATURI (JUREMA)|A
@@ -163,8 +169,10 @@
 |49|Rafaela --Mudou-se Prox Katia|Travessa Araré, 301 -3.76404 -38.61779||3|-376404|-3861779|PARQUE POTIRA (JUREMA)|A
 |33|Yasmim -- Mudou-se|Rua Guara, 1279 altos|Entre Torreon x Consumel, perto da Colibri, estudante. Mora com Rafael|3|-37633|-3862963|PARQUE POTIRA (JUREMA)|A
 |32|Zeneide --Mudou-se--|Travessa Taina,  51 -|Entre Consulmel x Torreon, perto da Anhanga, estudante|3|-376098|-3863337|PARQUE POTIRA (JUREMA)|A
+|281|João  Carlos & Claudiana|R. Raimundo Nonato, 148|||0|0|ICARAÍ|A
 |276|CHRISTIANO DIAS|Av. Contorno Norte, 486|||-37420315|-386656232|PLANALTO CAUCAIA|A
 |272|VINICIOS|Rua Irapuan Vidal, 1265|||-37588989|-386380948|PARQUE POTIRA (JUREMA)|A
+|288|Surdo -|Rua Santa Terezinha, 493 Altos|||-37748138|-386237417|MARECHAL RONDON (JUREMA)|A
 |77|Kezia|Rua Pedestre E 26, 107, -377156-3862958|Trabalha, folga só na segunda|3|-377156|-3862958|RES. ARATURI (JUREMA)|A
 |78|Bruno e thais|Rua Joaquim Bento Cavalcante, 734|Esquina com Félix Gomes da Rocha |5|-372713|-3866229|GRILO|A
 |79|Junior e Andrca|Rua Irapuan Vidal, 3558|Esquina Haianga|0|-376209|-3863362|PQ. POTIRA|A
@@ -179,8 +187,12 @@
 |92|Cintia|Rua Manoel Claudino Sales 453|Esquina Maestro Osiris|3|-375688|-3866406|METROPOLITANO|A
 |93|Valdir|Rua Da Salgadeira 87|Esquina Carlos Ribeiro e Coronel Alfredo Miranda|1|-373457|-3869848|CAPUAN|A
 |94|Valderina|Rua Cresostomo Guimarães 757|Esquina Senhora Genoveva e Da Salgadeira |3|-373971|-3869916|CAPUAN|A
+|283|Erinardo|R. São José, 12|||0|0|CURICACA|A
 |275|Silveline|Terrenos Invadidos|||-37737508|-38646135|METROPOLE SUL (ELDORADO)|A
+|280|Bruna & Daniele|R. Idelzuite Garcia, 472|||-36738408|-386752622|ICARAÍ|A
+|282|Carlos|R. Berlamino José, 25|||-36800246|-386610168|ICARAÍ|A
 |217|Maria de Jesus|Rua Fortaleza, 749||3|-434393|-3930811|CAMPINAS|A
+|284|Geany|R. Da. Ramy, 559|||0|0|CURICACA|A
 |277|JENNIFER|Rua Raimundo Ricardo, 288|||-37361992|-386692011|PE. JULIO MARIA|A
 |8|Salco do Reino|Av. São Vicente de Paula, 1551, -376737-3864006||7|-376737|-3864006|CONJ. ARATURI|T
 |58|Salco do Reino|Rua Tobias Correia, 1171, -373097-3866116||7|-373097|-3866116|CENTRO CAUCAIA|T

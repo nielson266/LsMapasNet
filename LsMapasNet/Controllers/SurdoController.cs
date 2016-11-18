@@ -104,7 +104,7 @@ namespace LsMapasNet.Controllers
         {
             int counter = 0;
             string line;
-            System.IO.StreamReader file =  new System.IO.StreamReader(@"C:\Sistemas\LsMapasNet\LsMapasNet\arquivos\scriptbanco.txt");
+            System.IO.StreamReader file =  new System.IO.StreamReader(@"C:\Sistemas\LsMapasNet\LsMapasNet\arquivos\scriptSurdo.txt");
 
 
             while ((line = file.ReadLine()) != null)
@@ -115,6 +115,9 @@ namespace LsMapasNet.Controllers
 
 
                 ObjSurdo.id = Convert.ToInt32(surdolinha[1]);
+
+                if(Convert.ToInt32(surdolinha[1]) == 279)
+                    counter++;
                 ObjSurdo.nome = surdolinha[2];
                 ObjSurdo.endereco = surdolinha[3];
                 ObjSurdo.perimetro = surdolinha[4];
@@ -131,7 +134,7 @@ namespace LsMapasNet.Controllers
             }
 
 
-
+            counter++;
 
         }
     }

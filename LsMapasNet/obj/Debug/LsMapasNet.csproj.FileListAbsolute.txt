@@ -57,7 +57,6 @@ C:\Sistemas\LsMapasNet\LsMapasNet\bin\Newtonsoft.Json.xml
 C:\Sistemas\LsMapasNet\LsMapasNet\obj\Debug\LsMapasNet.csprojResolveAssemblyReference.cache
 C:\Sistemas\LsMapasNet\LsMapasNet\obj\Debug\LsMapasNet.dll
 C:\Sistemas\LsMapasNet\LsMapasNet\obj\Debug\LsMapasNet.pdb
-C:\Sistemas\LsMapasNet\LsMapasNet\obj\Debug\LsMapasNet.Migrations.Inicial2.resources
 C:\Sistemas\LsMapasNet\LsMapasNet\obj\Debug\LsMapasNet.csproj.GenerateResource.Cache
 C:\Users\dp\Documents\Sistemas\LsMapasNet\LsMapasNet\bin\ApplicationInsights.config
 C:\Users\dp\Documents\Sistemas\LsMapasNet\LsMapasNet\bin\roslyn\csc.exe
@@ -120,3 +119,4 @@ C:\Users\dp\Documents\Sistemas\LsMapasNet\LsMapasNet\obj\Debug\LsMapasNet.dll
 C:\Users\dp\Documents\Sistemas\LsMapasNet\LsMapasNet\obj\Debug\LsMapasNet.pdb
 C:\Users\dp\Documents\Sistemas\LsMapasNet\LsMapasNet\obj\Debug\LsMapasNet.Migrations.Initial.resources
 C:\Users\dp\Documents\Sistemas\LsMapasNet\LsMapasNet\obj\Debug\LsMapasNet.csproj.GenerateResource.Cache
+C:\Sistemas\LsMapasNet\LsMapasNet\obj\Debug\LsMapasNet.Migrations.Initial.resources
