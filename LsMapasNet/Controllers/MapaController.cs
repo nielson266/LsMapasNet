@@ -91,7 +91,35 @@ namespace LsMapasNet.Controllers
 
         public ActionResult imprimir_listalatlongmapa(int id)
         {
-            return View();
+
+            List<object> coordenadassurdo = new List<object>();
+
+            var DtListMapa = dbMpContex.MapaSurdo.Where(m => m.idMapa == id).ToList();
+
+            var longmapa = Convert.ToDouble(DtListMapa[0].id_mapa.centromapa_long.Substring(0, 3) + "," + DtListMapa[0].id_mapa.centromapa_long.Substring(3, DtListMapa[0].id_mapa.centromapa_long.Length - 3));
+            var latMapa = Convert.ToDouble(DtListMapa[0].id_mapa.centromapa_lat.Substring(0, 2) + "," + DtListMapa[0].id_mapa.centromapa_lat.Substring(2, DtListMapa[0].id_mapa.centromapa_lat.Length - 2));
+            var zmapa = DtListMapa[0].id_mapa.zoommapa;
+
+            foreach (var item in DtListMapa)
+            {
+                coordenadassurdo.Add(new
+                {
+                    surdolong = Convert.ToDouble(item.id_surdo.longitude.Substring(0, 3) + "," + item.id_surdo.longitude.Substring(3, item.id_surdo.longitude.Length - 3)),
+                    surdolat = Convert.ToDouble(item.id_surdo.latitude.Substring(0, 2) + "," + item.id_surdo.latitude.Substring(2, item.id_surdo.latitude.Length - 2)),
+                });
+            }
+
+            List<object> dados = new List<object>();
+
+            dados.Add(new
+            {
+                listll = coordenadassurdo,
+                centlong = longmapa,
+                centlat = latMapa,
+                zoommapa = zmapa
+            });
+
+            return Json(dados, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Mapa/Delete/5
