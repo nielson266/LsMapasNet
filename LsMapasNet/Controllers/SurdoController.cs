@@ -12,14 +12,19 @@ namespace LsMapasNet.Controllers
     {
         private LsMapaContext dbMpContex = new LsMapaContext();
         // GET: Surdo
-        public ActionResult Index()
+        public ActionResult Index(string SearchSurdo)
         {
             //var listSurdo = dbMpContex.Surdo.ToList();
             try
             {
-                dbMpContex.Surdo.ToList();
-                LerArquivo();
-                return View(dbMpContex.Surdo.ToList());
+                var listsurdo = dbMpContex.Surdo.ToList();
+
+                if (!string.IsNullOrEmpty(SearchSurdo))
+                    listsurdo = listsurdo.Where(s => s.nome.Contains(SearchSurdo)).ToList();
+
+
+                    //LerArquivo();
+                    return View(listsurdo);
             }
             catch(Exception ex)
             {
@@ -59,16 +64,36 @@ namespace LsMapasNet.Controllers
         // GET: Surdo/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            List<SelectListItem> ListStatus = new List<SelectListItem>();
+            ListStatus.Add(new SelectListItem
+            {
+                Text = "Ativo", Value = "A"
+            });
+            ListStatus.Add(new SelectListItem
+            {
+                Text = "Mundou-se",
+                Value = "M"
+            });
+            ListStatus.Add(new SelectListItem
+            {
+                Text = "Não Visitar",
+                Value = "N"
+            });
+
+            ViewBag.ListStatus = ListStatus;
+
+            return View(dbMpContex.Surdo.Where(s=> s.id == id).First());
         }
 
         // POST: Surdo/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Surdo ObjSurdo, string ListStatus)
         {
             try
             {
-                // TODO: Add update logic here
+                ObjSurdo.status = ListStatus;
+                dbMpContex.Surdo.Add(ObjSurdo);
+                dbMpContex.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -104,7 +129,7 @@ namespace LsMapasNet.Controllers
         {
             int counter = 0;
             string line;
-            System.IO.StreamReader file =  new System.IO.StreamReader(@"C:\Sistemas\LsMapasNet\LsMapasNet\arquivos\scriptSurdo.txt");
+            System.IO.StreamReader file =  new System.IO.StreamReader(@"C:\Users\dp\Documents\Sistemas\LsMapasNet\LsMapasNet\arquivos\scriptSurdo.txt");
 
 
             while ((line = file.ReadLine()) != null)

@@ -6,6 +6,14 @@
 
 <h2>Lista de Surdos Cadastrados</h2>
 
+
+@using (Html.BeginForm())
+{
+    <p>
+        Nome: @Html.TextBox("SearchSurdo",string.Empty, new {@class = "form-control" } )
+        <input type="submit" value="Buscar" class="btn btn-default"/>
+    </p>
+}
 <p>
     @Html.ActionLink("Novo", "Create")
 </p>

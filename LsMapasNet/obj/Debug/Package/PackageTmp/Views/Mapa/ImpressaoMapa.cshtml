@@ -1,0 +1,115 @@
+﻿@model IEnumerable<LsMapasNet.Entidade.MapaSurdo>
+@{
+    Layout = "";
+}
+<style type="text/css">
+    table {
+        width: 14.5cm;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    td {
+        font-family: 'PT Sans', sans-serif;
+        font-size: 12px;
+        padding: 5px;
+    }
+
+    strong {
+        font-family: Arial,"Times New Roman", Georgia, Serif;
+        font-size: 12px;
+    }
+
+    #map {
+        width: 14.5cm;
+        height: 9cm;
+        margin-top: 5px;
+    }
+</style>
+
+<input id="btnhiddenidmapa" type="hidden" value=@ViewBag.idMapa></input>
+
+<div style="width: 14.5cm;height: 8.5cm; border: 1px solid black; padding: 5px">
+    <table>
+        @*<tr>
+            <th>
+                {{mapa}}
+            </th>
+        </tr>
+        {% for ls in lssurdo %}
+        <tr>
+            <td>
+                <strong>Nome:</strong>&nbsp;{{ ls.id_surdo.nome }}<br />
+                <strong>Endereço:</strong>&nbsp;{{ ls.id_surdo.endereco }}&nbsp;&nbsp;
+                <strong>Lat:</strong>&nbsp;{{ ls.id_surdo.latitude }}&nbsp;
+                <strong>Long:</strong>&nbsp;{{ ls.id_surdo.longitude }}
+            </td>
+        </tr>
+        {% endfor %}*@
+
+        <tr>
+            <th >
+                @ViewBag.Mapa
+            </th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <strong>Nome:</strong>&nbsp; @Html.DisplayFor(modelItem => item.id_surdo.nome)<br />
+                    <strong>Endereço:</strong>&nbsp;@Html.DisplayFor(modelItem => item.id_surdo.endereco)&nbsp;&nbsp;
+                    <strong>Lat:</strong>&nbsp;@Html.DisplayFor(modelItem => item.id_surdo.latitude)&nbsp;
+                    <strong>Long:</strong>&nbsp;@Html.DisplayFor(modelItem => item.id_surdo.longitude)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div id="map"></div>
+
+@Scripts.Render("~/bundles/jquery")
+
+<script type="text/javascript">
+
+	// The following example creates complex markers to indicate beaches near
+	// Sydney, NSW, Australia. Note that the anchor is set to (0,32) to correspond
+	// to the base of the flagpole.
+	var id = document.getElementById("btnhiddenidmapa").value
+
+	function initMap() {
+	  $.get('/mapa/imprimir_listalatlongmapa/' + id +"/", function(dt){
+	      console.log(dt[0]['centlat'])
+	      var lat = dt[0]['centlat']
+	      var long = dt[0]['centlong']
+	      var zmapa = dt[0]['zoommapa']
+            var map = new google.maps.Map(document.getElementById('map'), {
+	  		    zoom: Number(zmapa),
+			    center: {lat: lat, lng: long},
+			    disableDefaultUI: true,
+			  });
+			  setMarkers(map,dt);
+        });
+	 };
+
+	function setMarkers(map,dt) {
+	  // Adds markers to the map.
+
+	  // Shapes define the clickable region of the icon. The type defines an HTML
+	  // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+	  // The final coordinate closes the poly by connecting to the first coordinate.
+	    for (var i = 0; i < dt[0]['listll'].length; i++) {
+	        console.log(dt[0]['listll'][i]['surdolong']);
+	      var marker = new google.maps.Marker({
+	          position: { lat: dt[0]['listll'][i]['surdolat'], lng: dt[0]['listll'][i]['surdolong'] },
+	          map: map,
+	    });
+	  }
+	}
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBs4nbMqVqxOO610VnM-wB7iVvDBqy4D1Y&signed_in=true&callback=initMap"></script>
