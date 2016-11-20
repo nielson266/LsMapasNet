@@ -6,6 +6,15 @@
 
 <h2>Lista de Surdos Cadastrados</h2>
 
+
+@using (Html.BeginForm("index", "surdo", FormMethod.Post, new { @class = "form-inline" }))
+{
+    <div class="form-group">
+        <label for="exampleInputName2">Name:</label>
+        @Html.TextBox("SearchSurdo", string.Empty, new { @class = "form-control" })
+    </div>
+    <input type="submit" value="Buscar" class="btn btn-default" />
+}
 <p>
     @Html.ActionLink("Novo", "Create")
 </p>
@@ -38,36 +47,37 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.endereco)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.perimetro)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.classe)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.latitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.longitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.bairro)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.status)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endereco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.perimetro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.classe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.latitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.longitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bairro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.id })
+            </td>
+        </tr>
+    }
 
 </table>

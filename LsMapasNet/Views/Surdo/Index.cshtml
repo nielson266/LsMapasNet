@@ -9,11 +9,12 @@
 
 @using (Html.BeginForm("index", "surdo", FormMethod.Post, new { @class = "form-inline" }))
 {
+    <br />
     <div class="form-group">
-        <label for="exampleInputName2">Name:</label>
-        @Html.TextBox("SearchSurdo", string.Empty, new { @class = "form-control" })
+        @Html.TextBox("SearchSurdo", string.Empty, new { @class = "form-control", placeholder ="Pesquisa"})
     </div>
-    <input type="submit" value="Buscar" class="btn btn-default" />
+    <button  type="submit" class="btn btn-default">Buscar</button>
+
 }
 <p>
     @Html.ActionLink("Novo", "Create")
