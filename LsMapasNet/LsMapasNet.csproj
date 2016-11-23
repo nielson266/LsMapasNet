@@ -190,6 +190,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\materializecss\css\materialize.css" />
     <Content Include="Content\materializecss\css\materialize.min.css" />
     <Content Include="favicon.ico" />
@@ -231,6 +233,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jqueryui\jquery-ui.js" />
     <Content Include="Scripts\lsmapasjs\incluirmapa.js" />
     <Content Include="Scripts\materializejs\js\iniciamaterialize.js" />
     <Content Include="Scripts\materializejs\js\materialize.js" />
@@ -268,6 +271,7 @@
     <Content Include="Views\Mapa\Create.cshtml" />
     <Content Include="Views\Mapa\Edit.cshtml" />
     <Content Include="Views\Mapa\_dropdownlistsurdo.cshtml" />
+    <Content Include="Scripts\jqueryui\jquery-ui-1.12.1.custom.zip" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

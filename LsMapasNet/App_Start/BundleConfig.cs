@@ -11,6 +11,9 @@ namespace LsMapasNet
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                        "~/Scripts/jqueryui/jquery-ui.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
@@ -34,7 +37,8 @@ namespace LsMapasNet
                       "~/Scripts/lsmapasjs/incluirmapa.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/jquery-ui.css",
+                      "~/Content/jquery-ui.theme.css",
                       "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/materializecss").Include(

@@ -7,10 +7,26 @@
 
 @Html.Hidden("IdMapa")
 
+@*<input type="text" id="surdoNome" name="surdoNome">*@
+@*<label for="SurdoNome">Nome</label>*@
 
-<select name="SelectIdSurdo" id="SelectIdSurdo">
-    
-</select>
+@*@Html.TextBox("txtnome",null, new { id = "surdoNome" })*@
+
+
+
+<div class="row">
+    <div class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">textsms</i>
+                <input type="text" id="autocomplete-input" class="autocomplete">
+                <label for="autocomplete-input">Autocomplete</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <div id="dvListaSurdoMapa">
 
@@ -24,24 +40,31 @@
 
 @section Scriptsoutros
 {
-    @Scripts.Render("~/bundles/materializeselect")
+    @*@Scripts.Render("~/bundles/jqueryui")*@
 
     <script type="text/javascript">
 
-
-
         $(function () {
-            $.get("/mapa/dropdownlistsurdo", function (dados) {
+            @*$('#surdoNome').autocomplete({
+                source: '@Url.Action("dropdownlistsurdo")'
+            })*@
+            //$.get("/mapa/dropdownlistsurdo", function (dados) {
 
-                var listoption = "";
-                console.log(dados[0]);
-                for (var i = 0; i < dados.length; i++) {
+            //    var listsurdo = {};
+            //    console.log(dados);
 
-                    listoption += '<option value=' + dados[i]['id'] + '>' + dados[i]['nome'] + '</option>';
+            //    $('#surdoNome').autocomplete({
+            //        source: dados
+            //    })
+                
+            //});
+
+            $('input.autocomplete').autocomplete({
+                data: {
+                    "Apple": null,
+                    "Microsoft": null,
+                    "Google": 'http://placehold.it/250x250'
                 }
-                console.log(listoption);
-
-                $("#SelectIdSurdo").append(listoption);
             });
         });
         $("#btnIncluirMapaSurdo").click(function () {

@@ -166,11 +166,11 @@ namespace LsMapasNet.Controllers
 
 
 
-            List<object> dados = new List<object>();
+            List<string> dados = new List<string>();
 
             foreach (var item in ListSurdo)
             {
-                dados.Add(new { id = item.id, nome = item.nome });
+                dados.Add(item.nome);
             }
 
             return Json(dados, JsonRequestBehavior.AllowGet);
