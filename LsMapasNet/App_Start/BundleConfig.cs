@@ -23,9 +23,22 @@ namespace LsMapasNet
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/materializejs").Include(
+                      "~/Scripts/materializejs/js/materialize.js", "~/Scripts/materializejs/js/iniciamaterialize.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/materializeselect").Include(
+                      "~/Scripts/materializejs/js/materializeselect.js"));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/lsmapasjs").Include(
+                      "~/Scripts/lsmapasjs/incluirmapa.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/materializecss").Include(
+                      "~/Content/materializecss/css/materialize.min.css"));
         }
     }
 }

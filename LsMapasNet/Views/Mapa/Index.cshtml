@@ -4,41 +4,61 @@
     ViewBag.Title = "LISTA DE MAPAS";
 }
 
-<h2>LISTA DE MAPAS</h2>
 
-<p>
-    @Html.ActionLink("Novo", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.desc_mapa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.obs)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.zoommapa)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.desc_mapa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.obs)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.zoommapa)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Imprimir", "ImpressaoMapa", new { id = item.id })
-        </td>
-    </tr>
+
+@helper TruncateDescription(string input, int maxLength)
+{
+    if (input.Length <= maxLength)
+    {
+            @input
+    }
+    else
+    {
+            @input.Substring(0, maxLength)<text>...</text>
+    }
 }
 
-</table>
+<div class="container">
+
+    <h5>LISTA DE MAPAS</h5>
+
+    <p>
+        @Html.ActionLink("Novo", "Create")
+    </p>
+
+    <table class="striped">
+        <tr class="blue-grey darken-4">
+            <th class="white-text text-white">
+                Mapa
+            </th>
+            <th class="white-text text-white hide-on-small-only">
+                Obs
+            </th>
+            <th class="white-text text-white">
+                Zoom Mapa
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.desc_mapa)
+                </td>
+                <td class="hide-on-small-only">
+                    @TruncateDescription(item.obs,15)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.zoommapa)
+                </td>
+                <td>
+                    @Html.ActionLink("Add", "IncluirSurdoMapa", new { idmapa = item.id }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Imprimir", "ImpressaoMapa", new { id = item.id })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

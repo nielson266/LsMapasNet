@@ -34,17 +34,23 @@ namespace LsMapasNet.Controllers
 
         // POST: Mapa/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Mapas ObjMapa)
         {
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    dbMpContex.Mapas.Add(ObjMapa);
+                    dbMpContex.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                    return View(ObjMapa);
 
-                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception Ex)
             {
-                return View();
+                return View(ObjMapa);
             }
         }
 
@@ -78,7 +84,7 @@ namespace LsMapasNet.Controllers
 
         public ActionResult ImpressaoMapa(int id)
         {
-            
+
             var DtListMapa = dbMpContex.MapaSurdo.Where(m => m.idMapa == id).ToList();
 
             ViewBag.idMapa = id;
@@ -88,6 +94,93 @@ namespace LsMapasNet.Controllers
             return View(DtListMapa);
         }
 
+        public ActionResult IncluirSurdoMapa(int? idmapa)
+        {
+            string listbairros = "'SÃO MATEUS','SANTA LUZIA','SANTA CLARA','S','RIACHO SUJO','MONTE','PALESTINA','ITAPIPOCA','PENTECOSTE','ALTO GUARAMIRANGA','BOA VISTA','CAMPINAS','CAN','CANIDEZINHO','IMACULADA CONC.','JOAO PAULO II'";
+            ViewBag.SelectIdSurdo = from s in dbMpContex.Surdo
+                                    where !dbMpContex.MapaSurdo.Any(ms => (ms.idSurdo == s.id)) && (!listbairros.Contains(s.bairro))
+                                    orderby s.nome
+                                    select new { s.id, nome = s.nome + " - " + s.bairro };
+
+
+            ViewBag.ListMapaSurdo = dbMpContex.MapaSurdo.Where(ms => ms.idMapa == idmapa).ToList();
+
+            //var ListSurdo = dbMpContex.Surdo.Select(s => new { s.id, s.nome }).ToList();
+
+            ViewBag.IdMapa = idmapa;
+            //ViewBag.SelectIdSurdo = new SelectList
+            //(
+            //    ListSurdo,
+            //    "id",
+            //    "nome"
+            //);
+
+            
+            return View();
+        }
+
+        public ActionResult IncluirSurdoMapaJson(string IdMapa, string SelectIdSurdo)
+        {
+
+            MapaSurdo ObjMS = new MapaSurdo();
+            ObjMS.idMapa = Convert.ToInt32(IdMapa);
+            ObjMS.idSurdo = Convert.ToInt32(SelectIdSurdo);
+
+            dbMpContex.MapaSurdo.Add(ObjMS);
+            dbMpContex.SaveChanges();
+
+            string listbairros = "'SÃO MATEUS','SANTA LUZIA','SANTA CLARA','S','RIACHO SUJO','MONTE','PALESTINA','ITAPIPOCA','PENTECOSTE','ALTO GUARAMIRANGA','BOA VISTA','CAMPINAS','CAN','CANIDEZINHO','IMACULADA CONC.','JOAO PAULO II'";
+            ViewBag.SelectIdSurdo = from s in dbMpContex.Surdo
+                                    where !dbMpContex.MapaSurdo.Any(ms => (ms.idSurdo == s.id)) && (!listbairros.Contains(s.bairro))
+                                    orderby s.nome
+                                    select new { s.id, nome = s.nome + " - " + s.bairro };
+
+            var idMapaPar = Convert.ToInt32(IdMapa);
+            ViewBag.ListMapaSurdo = null;
+
+            //var ListSurdo = dbMpContex.Surdo.Select(s => new { s.id, s.nome }).ToList();
+
+            ViewBag.IdMapa = Convert.ToInt32(IdMapa);
+            //ViewBag.SelectIdSurdo = new SelectList
+            //(
+            //    ListSurdo,
+            //    "id",
+            //    "nome"
+            //);
+            return Json("OK");
+        }
+
+        public PartialViewResult _listasurdomapa(int id)
+        {
+            //ViewBag.ListMapaSurdo = dbMpContex.MapaSurdo.Where(ms => ms.idMapa == idmapa).ToList();
+            return PartialView(dbMpContex.MapaSurdo.Where(ms => ms.idMapa == id).ToList());
+        }
+
+        public JsonResult dropdownlistsurdo()
+        {
+            string listbairros = "'SÃO MATEUS','SANTA LUZIA','SANTA CLARA','S','RIACHO SUJO','MONTE','PALESTINA','ITAPIPOCA','PENTECOSTE','ALTO GUARAMIRANGA','BOA VISTA','CAMPINAS','CAN','CANIDEZINHO','IMACULADA CONC.','JOAO PAULO II'";
+            var ListSurdo = from s in dbMpContex.Surdo
+                            where !dbMpContex.MapaSurdo.Any(ms => (ms.idSurdo == s.id)) && (!listbairros.Contains(s.bairro))
+                            orderby s.nome
+                            select new { s.id, nome = s.nome + " - " + s.bairro };
+
+
+
+            List<object> dados = new List<object>();
+
+            foreach (var item in ListSurdo)
+            {
+                dados.Add(new { id = item.id, nome = item.nome });
+            }
+
+            return Json(dados, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult DeleteSurdoMapa(int id)
+        {
+            return View();
+        }
 
         public ActionResult imprimir_listalatlongmapa(int id)
         {
@@ -152,14 +245,14 @@ namespace LsMapasNet.Controllers
                 Mapas ObjMapa = new Mapas();
 
                 string[] Mapalinha = line.Split('|');
-                
+
                 ObjMapa.id = Convert.ToInt32(Mapalinha[1]);
                 ObjMapa.desc_mapa = Mapalinha[2];
                 ObjMapa.obs = Mapalinha[3];
                 ObjMapa.centromapa_lat = Mapalinha[4];
                 ObjMapa.centromapa_long = Mapalinha[5];
                 ObjMapa.id_surdo = Convert.ToInt32(Mapalinha[6]);
-                ObjMapa.zoommapa = Convert.ToDecimal(Mapalinha[7].Replace(".",","));
+                ObjMapa.zoommapa = Convert.ToDecimal(Mapalinha[7].Replace(".", ","));
 
 
                 dbMpContex.Mapas.Add(ObjMapa);
@@ -194,7 +287,7 @@ namespace LsMapasNet.Controllers
                     dbMpContex.MapaSurdo.Add(ObjMapaSurdo);
                     dbMpContex.SaveChanges();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     counter++;
                 }

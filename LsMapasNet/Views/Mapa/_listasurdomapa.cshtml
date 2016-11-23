@@ -1,0 +1,22 @@
+﻿@model IEnumerable<LsMapasNet.Entidade.MapaSurdo>
+
+<table class="table">
+    <tr>
+        <th>
+            Surdo
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.id_surdo.nome)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "DeleteSurdoMapa", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
