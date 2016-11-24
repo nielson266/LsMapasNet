@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - LSMapas</title>
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    @Styles.Render("~/Content/css")
+   @* @Styles.Render("~/Content/css")*@
     @Styles.Render("~/Content/materializecss")
-    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/easycomplete")
 </head>
 <body>
     <nav>
@@ -39,6 +40,7 @@
     @*@Scripts.Render("~/bundles/bootstrap")*@
     @Scripts.Render("~/bundles/materializejs")
     @Scripts.Render("~/bundles/lsmapasjs")
+    @Scripts.Render("~/bundles/easycomplete")
     @RenderSection("scripts", required: false)
     @RenderSection("Scriptsoutros", required: false)
 

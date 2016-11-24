@@ -7,25 +7,7 @@
 
 @Html.Hidden("IdMapa")
 
-@*<input type="text" id="surdoNome" name="surdoNome">*@
-@*<label for="SurdoNome">Nome</label>*@
-
-@*@Html.TextBox("txtnome",null, new { id = "surdoNome" })*@
-
-
-
-<div class="row">
-    <div class="col s12">
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">textsms</i>
-                <input type="text" id="autocomplete-input" class="autocomplete">
-                <label for="autocomplete-input">Autocomplete</label>
-            </div>
-        </div>
-    </div>
-</div>
-
+<input type="text" id="surdoNome" name="surdoNome">
 
 
 <div id="dvListaSurdoMapa">
@@ -37,34 +19,25 @@
 
 </div>
 
-
 @section Scriptsoutros
-{
-    @*@Scripts.Render("~/bundles/jqueryui")*@
-
+{   
     <script type="text/javascript">
 
         $(function () {
-            @*$('#surdoNome').autocomplete({
-                source: '@Url.Action("dropdownlistsurdo")'
-            })*@
-            //$.get("/mapa/dropdownlistsurdo", function (dados) {
 
-            //    var listsurdo = {};
-            //    console.log(dados);
+            $.get("/mapa/dropdownlistsurdo", function (dados) {
+                console.log(dados);
+                var options = {
+                    data: dados,
+                    list: {
+                        match: {
+                            enabled: true
+                        }
+                    }
+                };
 
-            //    $('#surdoNome').autocomplete({
-            //        source: dados
-            //    })
-                
-            //});
+                $("#surdoNome").easyAutocomplete(options);
 
-            $('input.autocomplete').autocomplete({
-                data: {
-                    "Apple": null,
-                    "Microsoft": null,
-                    "Google": 'http://placehold.it/250x250'
-                }
             });
         });
         $("#btnIncluirMapaSurdo").click(function () {
@@ -81,15 +54,15 @@
                     $.get("/mapa/_listasurdomapa", { id: idmapa }, function (data) {
                         $("#dvListaSurdoMapa").html(data);
                     });
-                    $.get("/mapa/_dropdownlistsurdo", function (datasurdo) {
+                    //$.get("/mapa/_dropdownlistsurdo", function (datasurdo) {
 
-                        var listoption = "";
-                        for (var i = 0; i < dt[0]['listsurdo'].length; i++) {
-                            listoption += '<option value=' + dt[0]['listsurdo'][i]['id'] + '>' + dt[0]['listsurdo'][i]['nome'] + '</option>';
-                        }
+                    //    var listoption = "";
+                    //    for (var i = 0; i < dt[0]['listsurdo'].length; i++) {
+                    //        listoption += '<option value=' + dt[0]['listsurdo'][i]['id'] + '>' + dt[0]['listsurdo'][i]['nome'] + '</option>';
+                    //    }
 
-                        $("#dvDropDownSurdo").html(listoption);
-                    });
+                    //    $("#dvDropDownSurdo").html(listoption);
+                    //});
                 });
             }
         });
