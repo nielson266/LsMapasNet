@@ -100,21 +100,11 @@ namespace LsMapasNet.Controllers
             ViewBag.SelectIdSurdo = from s in dbMpContex.Surdo
                                     where !dbMpContex.MapaSurdo.Any(ms => (ms.idSurdo == s.id)) && (!listbairros.Contains(s.bairro))
                                     orderby s.nome
-                                    select new { s.id, nome = s.nome + " - " + s.bairro };
-
+                                    select new { s.id, nome = s.nome + " | " + s.bairro };
 
             ViewBag.ListMapaSurdo = dbMpContex.MapaSurdo.Where(ms => ms.idMapa == idmapa).ToList();
 
-            //var ListSurdo = dbMpContex.Surdo.Select(s => new { s.id, s.nome }).ToList();
-
             ViewBag.IdMapa = idmapa;
-            //ViewBag.SelectIdSurdo = new SelectList
-            //(
-            //    ListSurdo,
-            //    "id",
-            //    "nome"
-            //);
-
             
             return View();
         }
@@ -124,7 +114,10 @@ namespace LsMapasNet.Controllers
 
             MapaSurdo ObjMS = new MapaSurdo();
             ObjMS.idMapa = Convert.ToInt32(IdMapa);
-            ObjMS.idSurdo = Convert.ToInt32(SelectIdSurdo);
+
+            string[] Mapalinha = SelectIdSurdo.Split('|');
+
+            ObjMS.idSurdo = dbMpContex.Surdo.Where(s => s.bairro.Contains(Mapalinha[1]) && s.nome.Contains(Mapalinha[0])).Select(s => s.id).First();
 
             dbMpContex.MapaSurdo.Add(ObjMS);
             dbMpContex.SaveChanges();
@@ -133,26 +126,17 @@ namespace LsMapasNet.Controllers
             ViewBag.SelectIdSurdo = from s in dbMpContex.Surdo
                                     where !dbMpContex.MapaSurdo.Any(ms => (ms.idSurdo == s.id)) && (!listbairros.Contains(s.bairro))
                                     orderby s.nome
-                                    select new { s.id, nome = s.nome + " - " + s.bairro };
+                                    select new { s.id, nome = s.nome + " | " + s.bairro };
 
             var idMapaPar = Convert.ToInt32(IdMapa);
-            ViewBag.ListMapaSurdo = null;
-
-            //var ListSurdo = dbMpContex.Surdo.Select(s => new { s.id, s.nome }).ToList();
-
             ViewBag.IdMapa = Convert.ToInt32(IdMapa);
-            //ViewBag.SelectIdSurdo = new SelectList
-            //(
-            //    ListSurdo,
-            //    "id",
-            //    "nome"
-            //);
+
             return Json("OK");
         }
 
         public PartialViewResult _listasurdomapa(int id)
         {
-            //ViewBag.ListMapaSurdo = dbMpContex.MapaSurdo.Where(ms => ms.idMapa == idmapa).ToList();
+            ViewBag.Mapa = dbMpContex.Mapas.Where(m => m.id == id).Select(s => s.desc_mapa).First();
             return PartialView(dbMpContex.MapaSurdo.Where(ms => ms.idMapa == id).ToList());
         }
 
@@ -162,7 +146,7 @@ namespace LsMapasNet.Controllers
             var ListSurdo = from s in dbMpContex.Surdo
                             where !dbMpContex.MapaSurdo.Any(ms => (ms.idSurdo == s.id)) && (!listbairros.Contains(s.bairro))
                             orderby s.nome
-                            select new { s.id, nome = s.nome + " - " + s.bairro };
+                            select new { s.id, nome = s.nome + " | " + s.bairro };
 
 
 

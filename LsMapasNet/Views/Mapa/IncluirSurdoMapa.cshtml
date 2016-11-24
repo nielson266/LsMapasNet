@@ -7,20 +7,33 @@
 
 @Html.Hidden("IdMapa")
 
-<input type="text" id="surdoNome" name="surdoNome">
+<div class="container">
+    <div class="row">
+        <div class="col s4 m4 l8">
+            <div class="input-field col s12 m8 l11">
+                @*<input placeholder="Placeholder" id="first_name" type="text" class="validate">*@
+                <input type="text" id="surdoNome" name="surdoNome" placeholder="Digite um nome">
+            </div>
+        </div>
+        <div class="col s4 m4 l4">
+            <div class="input-field col s12 m4 l4">
+                <a id="btnIncluirMapaSurdo" class="waves-effect waves-light btn-large"><i class="material-icons center">add</i></a>
+            </div>
+        </div>
+    </div>
 
+    <div id="dvListaSurdoMapa">
 
-<div id="dvListaSurdoMapa">
+        @{
 
-    @{
+            Html.RenderPartial("_listasurdomapa", (object)ViewBag.ListMapaSurdo);
+        }
 
-        Html.RenderPartial("_listasurdomapa", (object)ViewBag.ListMapaSurdo);
-    }
-
+    </div>
 </div>
 
 @section Scriptsoutros
-{   
+{
     <script type="text/javascript">
 
         $(function () {
@@ -41,14 +54,18 @@
             });
         });
         $("#btnIncluirMapaSurdo").click(function () {
-            if ($("#SelectIdSurdo option:selected").val() == "") {
+            //if ($("#SelectIdSurdo option:selected").val() == "") {
+            //    alert('Selecione um surdo!');
+            //}
+            console.log($("#surdoNome").val());
+            if ($("#surdoNome").val() == "") {
                 alert('Selecione um surdo!');
             }
             else {
                 console.log()
                 var idmapa = $("#IdMapa").val();
                 console.log(idmapa);
-                var idselectsurdo = $("#SelectIdSurdo option:selected").val();
+                var idselectsurdo = $("#surdoNome").val();
                 console.log(idselectsurdo);
                 $.post("/mapa/IncluirSurdoMapaJson", { IdMapa: idmapa, SelectIdSurdo: idselectsurdo }, function (data) {
                     $.get("/mapa/_listasurdomapa", { id: idmapa }, function (data) {
