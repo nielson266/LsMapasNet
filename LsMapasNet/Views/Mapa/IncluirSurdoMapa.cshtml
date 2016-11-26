@@ -9,15 +9,17 @@
 
 <div class="container">
     <div class="row">
-        <div class="col s4 m4 l8">
-            <div class="input-field col s12 m8 l11">
+        <div class="col s4 m10 l10">
+            <div class="input-field col s12 m8 l10">
                 @*<input placeholder="Placeholder" id="first_name" type="text" class="validate">*@
                 <input type="text" id="surdoNome" name="surdoNome" placeholder="Digite um nome">
             </div>
         </div>
-        <div class="col s4 m4 l4">
-            <div class="input-field col s12 m4 l4">
-                <a id="btnIncluirMapaSurdo" class="waves-effect waves-light btn-large"><i class="material-icons center">add</i></a>
+        <div class="col s4 m2 l2">
+            <div style="padding-top:7px">
+                <div class="input-field col s12 m4 l2">
+                    <a id="btnIncluirMapaSurdo" class="waves-effect waves-light btn-large"><i class="material-icons center">add</i></a>
+                </div>
             </div>
         </div>
     </div>
@@ -34,55 +36,5 @@
 
 @section Scriptsoutros
 {
-    <script type="text/javascript">
-
-        $(function () {
-
-            $.get("/mapa/dropdownlistsurdo", function (dados) {
-                console.log(dados);
-                var options = {
-                    data: dados,
-                    list: {
-                        match: {
-                            enabled: true
-                        }
-                    }
-                };
-
-                $("#surdoNome").easyAutocomplete(options);
-
-            });
-        });
-        $("#btnIncluirMapaSurdo").click(function () {
-            //if ($("#SelectIdSurdo option:selected").val() == "") {
-            //    alert('Selecione um surdo!');
-            //}
-            console.log($("#surdoNome").val());
-            if ($("#surdoNome").val() == "") {
-                alert('Selecione um surdo!');
-            }
-            else {
-                console.log()
-                var idmapa = $("#IdMapa").val();
-                console.log(idmapa);
-                var idselectsurdo = $("#surdoNome").val();
-                console.log(idselectsurdo);
-                $.post("/mapa/IncluirSurdoMapaJson", { IdMapa: idmapa, SelectIdSurdo: idselectsurdo }, function (data) {
-                    $.get("/mapa/_listasurdomapa", { id: idmapa }, function (data) {
-                        $("#dvListaSurdoMapa").html(data);
-                    });
-                    //$.get("/mapa/_dropdownlistsurdo", function (datasurdo) {
-
-                    //    var listoption = "";
-                    //    for (var i = 0; i < dt[0]['listsurdo'].length; i++) {
-                    //        listoption += '<option value=' + dt[0]['listsurdo'][i]['id'] + '>' + dt[0]['listsurdo'][i]['nome'] + '</option>';
-                    //    }
-
-                    //    $("#dvDropDownSurdo").html(listoption);
-                    //});
-                });
-            }
-        });
-    </script>
-
+    @Scripts.Render("~/bundles/lsmapasjs")
 }

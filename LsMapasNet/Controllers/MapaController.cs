@@ -105,7 +105,7 @@ namespace LsMapasNet.Controllers
             ViewBag.ListMapaSurdo = dbMpContex.MapaSurdo.Where(ms => ms.idMapa == idmapa).ToList();
 
             ViewBag.IdMapa = idmapa;
-            
+
             return View();
         }
 
@@ -117,7 +117,9 @@ namespace LsMapasNet.Controllers
 
             string[] Mapalinha = SelectIdSurdo.Split('|');
 
-            ObjMS.idSurdo = dbMpContex.Surdo.Where(s => s.bairro.Contains(Mapalinha[1]) && s.nome.Contains(Mapalinha[0])).Select(s => s.id).First();
+            var nome = Mapalinha[0].ToString();
+            var bairro = Mapalinha[1].ToString();
+            ObjMS.idSurdo = dbMpContex.Surdo.Where(s => s.bairro.Trim().Contains(bairro.Trim()) && s.nome.Trim().Contains(nome.Trim())).Select(s => s.id).First();
 
             dbMpContex.MapaSurdo.Add(ObjMS);
             dbMpContex.SaveChanges();
@@ -160,6 +162,25 @@ namespace LsMapasNet.Controllers
             return Json(dados, JsonRequestBehavior.AllowGet);
         }
 
+
+        public JsonResult ExcluirSurdoMapa(string idsurdo)
+        {
+            try
+            {
+                var retidsurdo = Convert.ToInt32(idsurdo);
+
+                var ObjMapaSurdo = dbMpContex.MapaSurdo.Where(ms => ms.id == retidsurdo).FirstOrDefault();
+
+                dbMpContex.Entry(ObjMapaSurdo).State = System.Data.Entity.EntityState.Deleted;
+                dbMpContex.SaveChanges();
+
+                return Json("OK");
+            }
+            catch (Exception ex)
+            {
+                return Json("Erro: " + ex.Message.ToString());
+            }
+        }
 
         public ActionResult DeleteSurdoMapa(int id)
         {
