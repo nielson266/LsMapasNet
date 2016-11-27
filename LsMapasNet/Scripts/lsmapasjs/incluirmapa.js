@@ -47,10 +47,10 @@ $("#btnIncluirMapaSurdo").click(function () {
         });
     }
 });
-$(".btnExcluirSurdoMapa a").on("click", function (event) {
-    alert('Click on')
-    console.log($(this).text() + ' on' );
-});
+//$(".btnExcluirSurdoMapa a").on("click", function (event) {
+//    alert('Click on')
+//    console.log($(this).text() + ' on' );
+//});
 
 //$(".btnExcluirSurdoMapa a").click(function () {
 //    var idmapa = $("#IdMapa").val();

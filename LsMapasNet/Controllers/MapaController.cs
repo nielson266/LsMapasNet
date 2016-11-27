@@ -163,22 +163,25 @@ namespace LsMapasNet.Controllers
         }
 
 
-        public JsonResult ExcluirSurdoMapa(string idsurdo)
+        public ActionResult ExcluirSurdoMapa(string idsurdo)
         {
+            
             try
             {
                 var retidsurdo = Convert.ToInt32(idsurdo);
 
                 var ObjMapaSurdo = dbMpContex.MapaSurdo.Where(ms => ms.id == retidsurdo).FirstOrDefault();
 
+                var id = ObjMapaSurdo.idMapa;
+
                 dbMpContex.Entry(ObjMapaSurdo).State = System.Data.Entity.EntityState.Deleted;
                 dbMpContex.SaveChanges();
 
-                return Json("OK");
+                return RedirectToAction("IncluirSurdoMapa", new { idmapa= id });
             }
             catch (Exception ex)
             {
-                return Json("Erro: " + ex.Message.ToString());
+                return RedirectToAction("IncluirSurdoMapa", new { idmapa = 0 });
             }
         }
 
