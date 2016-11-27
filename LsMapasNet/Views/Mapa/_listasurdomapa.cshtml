@@ -1,14 +1,25 @@
 ﻿@model IEnumerable<LsMapasNet.Entidade.MapaSurdo>
 
 
-<ul class="collection">
+<ul id="listsurdocad" class="collection">
     @foreach (var item in Model)
     {
-        <li class="collection-item">
+        <li class="collection-item btnExcluirSurdoMapa">
             <div>
                 @item.id_surdo.nome
-                <button class="btnExcluirSurdoMapa secondary-content" data-id=@item.id><i class="Medium pink-text  text-darken-3 material-icons">delete_forever</i></button>
+                <a href="#" class="secondary-content" data-id=@item.id><i class="Medium pink-text  text-darken-3 material-icons">delete_forever</i></a>
+                @*<button class="btnExcluirSurdoMapa secondary-content" data-id=@item.id></button>*@
             </div>
         </li>
     }
-    </ul>
+</ul>
+@section Scriptsoutros
+{
+    @*<script type="text/javascript">
+        $(".btnExcluirSurdoMapa a").click(function () {
+            var elem = $(this);
+            alert('Click not on');
+            console.log(elem.data('id') + " not on");
+        });
+    </script>*@
+}
