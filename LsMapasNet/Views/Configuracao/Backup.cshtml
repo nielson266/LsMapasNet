@@ -3,22 +3,16 @@
     ViewBag.Title = "Backup";
 }
 
-<h5>Backup</h5>
+<div class="container">
+    <h5 class="amber-text text-darken-4">Backup</h5>
 
-@using (Html.BeginForm())
-{
-
-    <div class="container">
-
-        @*<label for="files">Selecione a pasta:</label>
-            <input type="file" name="files" multiple/>*@
+    @using (Html.BeginForm())
+    {
 
         <button type="button" id="btnBackup"> Backup </button>
         <a href=@Url.Action("Download", "Configuracao")>Download</a>
-        @Html.Hidden("caminho")
-        @* <input type="hidden" value="" id="caminho" nome="caminho" />*@
-    </div>
-}
+    }
+</div>
 @section Scriptsoutros
 {
     <script type="text/javascript">

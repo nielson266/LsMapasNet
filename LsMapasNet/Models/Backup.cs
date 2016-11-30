@@ -51,5 +51,35 @@ namespace LsMapasNet.Models
                 return false;
             }
         }
+        public bool RestauraDataBase(string patharquivo)
+        {
+            try
+            {
+                string file = patharquivo;
+
+                var constring = ConfigurationManager.ConnectionStrings["LsMapaContextconnectionString"].ConnectionString;
+
+                using (MySqlConnection conn = new MySqlConnection(constring))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand())
+                    {
+
+                        using (MySqlBackup mb = new MySqlBackup(cmd))
+                        {
+                            cmd.Connection = conn;
+                            conn.Open();
+                            mb.ImportFromFile(file);
+                            conn.Close();
+                        }
+                    }
+                }
+                return true;
+            }
+            catch (Exception Ex)
+            {
+                patharquivo = string.Empty;
+                return false;
+            }
+        }
     }
 }

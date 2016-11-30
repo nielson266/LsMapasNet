@@ -54,7 +54,7 @@
                     @Html.DisplayFor(modelItem => item.zoommapa)
                 </td>
                 <td>
-                    <a href=@Url.Action("IncluirSurdoMapa", "Mapa",new { id = @item.id }) class="btn-floating btn waves-effect waves-light cyan accent-4"><i class="material-icons">add</i></a>
+                    <a href=@Url.Action("IncluirSurdoMapa", "Mapa",new { idmapa = @item.id }) class="btn-floating btn waves-effect waves-light cyan accent-4"><i class="material-icons">add</i></a>
                     <a href=@Url.Action("Edit", "Mapa",new { id = @item.id }) class="btn-floating btn waves-effect waves-light amber darken-4" ><i class="material-icons">mode_edit</i></a>
                     <a href=@Url.Action("ImpressaoMapa", "Mapa",new { id = @item.id }) class="btn-floating btn waves-effect waves-light green darken-4 "><i class="material-icons">print</i></a>
                 </td>

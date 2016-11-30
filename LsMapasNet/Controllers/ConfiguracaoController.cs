@@ -2,6 +2,7 @@
 using LsMapasNet.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -22,6 +23,51 @@ namespace LsMapasNet.Controllers
         }
         public ActionResult Restaurar()
         {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Restaurar(HttpPostedFileBase file)
+        {
+            ObjBackup = new Models.Backup();
+            if (file != null && file.ContentLength > 0)
+            {
+                try
+                {
+                    CriarPastaRestauracao();
+                    string path = Path.Combine(Server.MapPath("~/restauracao"),
+                                               Path.GetFileName(file.FileName));
+                    file.SaveAs(path);
+
+                    if (dbMpContex.Database.Exists())
+                    {
+                        dbMpContex.Database.Delete();
+                        try
+                        {
+                            dbMpContex.Database.Create();
+                        }
+                        catch(Exception ex)
+                        {
+                            ObjBackup.RestauraDataBase(path);
+                        }
+
+                    }
+                    else
+                    {
+                        dbMpContex.Database.Create();
+                        ObjBackup.RestauraDataBase(path);
+                    }
+
+                    return RedirectToAction("index", "Home");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                }
+            }
+            else
+            {
+                ViewBag.Message = "You have not specified a file.";
+            }
             return View();
         }
 
@@ -73,6 +119,20 @@ namespace LsMapasNet.Controllers
                 ListRetorno.Add(Ex.Message.ToString());
                 return Json(ListRetorno,JsonRequestBehavior.AllowGet);
             }
+        }
+
+        public void CriarPastaRestauracao()
+        {
+            if (!Directory.Exists(Server.MapPath("~/restauracao")))
+            {
+                Directory.CreateDirectory(Server.MapPath("~/restauracao"));
+            }
+            else
+            {
+                Directory.Delete(Server.MapPath("~/restauracao"),true);
+                Directory.CreateDirectory(Server.MapPath("~/restauracao"));
+            }
+            
         }
     }
 }

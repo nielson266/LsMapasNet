@@ -123,3 +123,6 @@ C:\Sistemas\LsMapasNet\LsMapasNet\obj\Debug\LsMapasNet.Migrations.Initial.resour
 C:\Sistemas\LsMapasNet\LsMapasNet\bin\EntityFramework.Extended.dll
 C:\Sistemas\LsMapasNet\LsMapasNet\bin\EntityFramework.Extended.xml
 C:\Sistemas\LsMapasNet\LsMapasNet\bin\MySqlBackup.dll
+C:\Users\dp\Documents\Sistemas\LsMapasNet\LsMapasNet\bin\EntityFramework.Extended.dll
+C:\Users\dp\Documents\Sistemas\LsMapasNet\LsMapasNet\bin\MySqlBackup.dll
+C:\Users\dp\Documents\Sistemas\LsMapasNet\LsMapasNet\bin\EntityFramework.Extended.xml
