@@ -11,20 +11,25 @@ namespace LsMapasNet.Controllers
     public class SurdoController : Controller
     {
         private LsMapaContext dbMpContex = new LsMapaContext();
+        List<Surdo> ObjList;
         // GET: Surdo
         public ActionResult Index(string SearchSurdo)
         {
             //var listSurdo = dbMpContex.Surdo.ToList();
             try
             {
-                var listsurdo = dbMpContex.Surdo.ToList();
+                ObjList = new List<Surdo>();
+                ObjList = dbMpContex.Surdo.ToList();
 
                 if (!string.IsNullOrEmpty(SearchSurdo))
-                    listsurdo = listsurdo.Where(s => s.nome.Contains(SearchSurdo)).ToList();
+                {
+                    ObjList = ObjList.Where(c => c.nome.Contains(SearchSurdo)).ToList();
+                }
+                    
 
 
                     //LerArquivo();
-                    return View(listsurdo);
+                    return View(ObjList);
             }
             catch(Exception ex)
             {
@@ -41,33 +46,12 @@ namespace LsMapasNet.Controllers
         // GET: Surdo/Create
         public ActionResult Create()
         {
-            return View();
-        }
 
-        // POST: Surdo/Create
-        [HttpPost]
-        public ActionResult Create(Surdo collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-                dbMpContex.Surdo.Add(collection);
-                dbMpContex.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            catch(Exception ex)
-            {
-                return View();
-            }
-        }
-
-        // GET: Surdo/Edit/5
-        public ActionResult Edit(int id)
-        {
             List<SelectListItem> ListStatus = new List<SelectListItem>();
             ListStatus.Add(new SelectListItem
             {
-                Text = "Ativo", Value = "A"
+                Text = "Ativo",
+                Value = "A"
             });
             ListStatus.Add(new SelectListItem
             {
@@ -81,23 +65,198 @@ namespace LsMapasNet.Controllers
             });
 
             ViewBag.ListStatus = ListStatus;
+            return View();
+        }
 
-            return View(dbMpContex.Surdo.Where(s=> s.id == id).First());
+        // POST: Surdo/Create
+        [HttpPost]
+        public ActionResult Create(Surdo collection, string ListStatus)
+        {
+            try
+            {
+                //if (ListStatus != string.Empty)
+                //{
+                //    collection.status = ListStatus;
+                //}
+
+
+
+                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    collection.id = dbMpContex.Surdo.Max(s => s.id) + 1;
+                    dbMpContex.Surdo.Add(collection);
+                    dbMpContex.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                List<SelectListItem> ListStatusCbo = new List<SelectListItem>();
+                ListStatusCbo.Add(new SelectListItem
+                {
+                    Text = "Ativo",
+                    Value = "A"
+                });
+                ListStatusCbo.Add(new SelectListItem
+                {
+                    Text = "Mundou-se",
+                    Value = "M"
+                });
+                ListStatusCbo.Add(new SelectListItem
+                {
+                    Text = "Não Visitar",
+                    Value = "N"
+                });
+
+                ViewBag.ListStatus = ListStatusCbo;
+
+                return View(collection);
+            }
+            catch(Exception ex)
+            {
+                return View();
+            }
+        }
+
+        // GET: Surdo/Edit/5
+        public ActionResult Edit(int id)
+        {
+            List<SelectListItem> ListStatus = new List<SelectListItem>();
+
+            var RetSurdo = dbMpContex.Surdo.Where(s => s.id == id).First();
+
+            if (RetSurdo.status == "A")
+            {
+                ListStatus.Add(new SelectListItem
+                {
+                    Text = "Ativo",
+                    Value = "A",
+                    Selected = true,
+                });
+            }
+            else
+            {
+                ListStatus.Add(new SelectListItem
+                {
+                    Text = "Ativo",
+                    Value = "A"
+                });
+            }
+            if (RetSurdo.status == "M")
+            {
+                ListStatus.Add(new SelectListItem
+                {
+                    Text = "Mundou-se",
+                    Value = "M",
+                    Selected = true
+                });
+            }
+            else
+            {
+                ListStatus.Add(new SelectListItem
+                {
+                    Text = "Mundou-se",
+                    Value = "M"
+                });
+            }
+
+            if (RetSurdo.status == "N")
+            {
+                ListStatus.Add(new SelectListItem
+                {
+                    Text = "Não Visitar",
+                    Value = "N",
+                    Selected = true
+                });
+            }
+            else
+            {
+                ListStatus.Add(new SelectListItem
+                {
+                    Text = "Não Visitar",
+                    Value = "N"
+                });
+            }
+
+            ViewBag.ListStatus = ListStatus;
+
+            return View(RetSurdo); ;
         }
 
         // POST: Surdo/Edit/5
         [HttpPost]
-        public ActionResult Edit(Surdo ObjSurdo, string ListStatus)
+        public ActionResult Edit(Surdo ObjSurdo)
         {
             try
             {
-                ObjSurdo.status = ListStatus;
-                dbMpContex.Surdo.Add(ObjSurdo);
-                dbMpContex.SaveChanges();
+                List<SelectListItem> ListStatus = new List<SelectListItem>();
 
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    dbMpContex.Entry(ObjSurdo).State = System.Data.Entity.EntityState.Modified;
+
+                    dbMpContex.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    if (ObjSurdo.status == "A")
+                    {
+                        ListStatus.Add(new SelectListItem
+                        {
+                            Text = "Ativo",
+                            Value = "A",
+                            Selected = true,
+                        });
+                    }
+                    else
+                    {
+                        ListStatus.Add(new SelectListItem
+                        {
+                            Text = "Ativo",
+                            Value = "A"
+                        });
+                    }
+                    if (ObjSurdo.status == "M")
+                    {
+                        ListStatus.Add(new SelectListItem
+                        {
+                            Text = "Mundou-se",
+                            Value = "M",
+                            Selected = true
+                        });
+                    }
+                    else
+                    {
+                        ListStatus.Add(new SelectListItem
+                        {
+                            Text = "Mundou-se",
+                            Value = "M"
+                        });
+                    }
+
+                    if (ObjSurdo.status == "N")
+                    {
+                        ListStatus.Add(new SelectListItem
+                        {
+                            Text = "Não Visitar",
+                            Value = "N",
+                            Selected = true
+                        });
+                    }
+                    else
+                    {
+                        ListStatus.Add(new SelectListItem
+                        {
+                            Text = "Não Visitar",
+                            Value = "N"
+                        });
+                    }
+
+                    ViewBag.ListStatus = ListStatus;
+                }
+                return View();
             }
-            catch
+            catch(Exception Ex)
             {
                 return View();
             }

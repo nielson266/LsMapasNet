@@ -11,6 +11,10 @@
     @Styles.Render("~/Content/easycomplete")
 </head>
 <body>
+    <ul id="dropdown1" class="dropdown-content">
+        <li>@Html.ActionLink("Backup", "Backup", "Configuracao")</li>
+        <li>@Html.ActionLink("Restauração", "Restauracao", "Configuracao")</li>
+    </ul>
     <nav>
         <div class="nav-wrapper blue-grey darken-4">
             @Html.ActionLink("LSMapas", "Index", "Home", new { area = "" }, new { @class = "brand-logo right" })
@@ -19,6 +23,7 @@
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                 <li>@Html.ActionLink("Surdo", "Index", "Surdo")</li>
                 <li>@Html.ActionLink("Mapa", "Index", "Mapa")</li>
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Configuracação<i class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>

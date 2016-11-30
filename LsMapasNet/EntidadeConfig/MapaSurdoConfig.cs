@@ -20,6 +20,7 @@ namespace LsMapasNet.EntidadeConfig
 
             HasRequired(c => c.id_surdo)
                .WithMany()
+
                .HasForeignKey(c => c.idSurdo);
         }
     }

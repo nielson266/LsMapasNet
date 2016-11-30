@@ -6,11 +6,11 @@
 
 
 
-<div class="fixed-action-btn">
-    <a class="btn-floating btn-large red">
-        <i class="large material-icons">add</i>
-    </a>
-</div>
+@*<div class="fixed-action-btn">
+        <a class="btn-floating btn-large red">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>*@
 
 <div class="container">
     <h3 class="center-align">Lista de Surdos Cadastrados</h3>
@@ -19,18 +19,21 @@
     {
 
         <div class="row">
-            <div class="col s10 m12 l12">
+            <div class="col s12 m10 l10">
                 <div class="input-field inline">
-                    @Html.TextBox("SearchSurdo", string.Empty, new { placeholder = "Pesquisa" })                    
+                    @Html.TextBox("SearchSurdo", string.Empty, new { placeholder = "Pesquisa" })
                 </div>
                 <button type="submit" class="waves-effect waves-light btn">Buscar</button>
             </div>
+            <div class="col s12 m2 l2" style="padding-top:17px">
+                <a href=@Url.Action("Create","Surdo")  class="btn-floating btn waves-effect waves-light red right"><i class="material-icons">add</i></a>
+            </div>
         </div>
-        <br />
     }
     @*<p>
             @Html.ActionLink("Novo", "Create")
         </p>*@
+
     <table class="table ">
         <tr class="blue-grey darken-4">
             <th class="white-text text-white">
@@ -82,7 +85,7 @@
                     @Html.DisplayFor(modelItem => item.status)
                 </td>
                 <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.id })
+                    <a href=@Url.Action("Edit","Surdo",new { id = @item.id }) class="btn-floating btn waves-effect waves-light amber darken-4"><i class="material-icons">mode_edit</i></a>
                 </td>
             </tr>
         }

@@ -4,86 +4,91 @@
     ViewBag.Title = "Editar Cadastro";
 }
 
-<h2>Editar Cadadastro</h2>
+<div class="container">
+    <h5>Editar Cadadastro</h5>
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Surdo</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.id)
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            <strong class="control-label col-md-2">Nome</strong>
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nome, "", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            <h5 class="amber-text text-darken-4">Surdo: @Html.DisplayFor(model => model.nome, new { htmlAttributes = new { @class = "blue-grey-text text-darken-4 validate" } })</h5>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.id)
+            @Html.HiddenFor(model => model.nome)
+
+            @*<div class="row">
+                <div class="input-field col s10 m10 l10">
+                    @Html.DisplayFor(model => model.nome, new { htmlAttributes = new { @class = "blue-grey-text text-darken-4 validate" } })
+                    @Html.ValidationMessageFor(model => model.nome, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+            <div class="row">
+                <div class="input-field col s12 m6 l6">
+                    @Html.EditorFor(model => model.endereco, new { htmlAttributes = new { @class = "validate" } })
+                    @Html.ValidationMessageFor(model => model.endereco, "", new { @class = "text-danger" })
+                    <label for="endereco">Endereco</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6 l6">
+                    @Html.EditorFor(model => model.perimetro, new { htmlAttributes = new { @class = "validate" } })
+                    @Html.ValidationMessageFor(model => model.perimetro, "", new { @class = "text-danger" })
+                    <label for="perimetro">Perimetro</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12 m6 l6">
+                    @Html.EditorFor(model => model.latitude, new { htmlAttributes = new { @class = "validate" } })
+                    @Html.ValidationMessageFor(model => model.latitude, "", new { @class = "text-danger" })
+                    <label for="latitude">Latitude</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6 l6">
+                    @Html.EditorFor(model => model.longitude, new { htmlAttributes = new { @class = "validate" } })
+                    @Html.ValidationMessageFor(model => model.longitude, "", new { @class = "text-danger" })
+                    <label for="longitude">Longitude</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12 m6 l6">
+                    @Html.EditorFor(model => model.bairro, new { htmlAttributes = new { @class = "validate" } })
+                    @Html.ValidationMessageFor(model => model.bairro, "", new { @class = "text-danger" })
+                    <label for="bairro">Bairro</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6 l6">
+                    @Html.DropDownListFor(model => model.status, ViewBag.ListStatus as IEnumerable<SelectListItem>)
+                    @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Salva" class="btn btn-primary" />
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <strong class="control-label col-md-2">Endereco</strong>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.endereco, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.endereco, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <strong class="control-label col-md-2">Perimetro</strong>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.perimetro, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.perimetro, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <strong class="control-label col-md-2">Latitude</strong>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.latitude, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.latitude, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <strong class="control-label col-md-2">Longitude</strong>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.longitude, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.longitude, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <strong class="control-label col-md-2">Bairro</strong>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.bairro, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.bairro, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <strong class="control-label col-md-2">Status</strong>
-            <div class="col-md-10">
-                @Html.DropDownList("ListStatus",null,string.Empty, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Salva" class="btn btn-primary" />
-            </div>
-        </div>
+    }
+    <div>
+        @Html.ActionLink("Voltar", "Index")
     </div>
-}
-<div>
-    @Html.ActionLink("Voltar", "Index")
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+}
+
+@section Scriptsoutros
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('select').material_select();
+        });
+    </script>
 }

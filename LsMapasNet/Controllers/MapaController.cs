@@ -57,24 +57,101 @@ namespace LsMapasNet.Controllers
         // GET: Mapa/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(dbMpContex.Mapas.Where(m => m.id == id).FirstOrDefault());
         }
 
         // POST: Mapa/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Mapas ObjMapa)
         {
             try
             {
                 // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    dbMpContex.Entry(ObjMapa).State = System.Data.Entity.EntityState.Modified;
+                    dbMpContex.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(ObjMapa);
             }
             catch
+            {
+                return View(ObjMapa);
+            }
+        }
+
+        public ActionResult Migracao()
+        {
+            var listamap = dbMpContex.Mapas.ToList();
+
+            ViewBag.ListaMapa = new SelectList
+                            (
+                                listamap,
+                                "id",
+                                "desc_mapa"
+                            );
+
+
+            ViewBag.ListaMapaMigracao = new SelectList
+                            (
+                                listamap,
+                                "id",
+                                "desc_mapa"
+                            );
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Migracao(string ListaMapa, string ListaMapaMigracao)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(ListaMapa) && !string.IsNullOrEmpty(ListaMapaMigracao))
+                {
+                    int idmaparet = Convert.ToInt32(ListaMapa);
+                    int idmapaMigracao = Convert.ToInt32(ListaMapaMigracao);
+
+                    var ListRetSurdo = dbMpContex.MapaSurdo.Where(ms => ms.idMapa == idmaparet).ToList();
+
+
+                    foreach (var item in ListRetSurdo)
+                    {
+                        MapaSurdo ObjMapaSurdo = new MapaSurdo();
+                        ObjMapaSurdo.idMapa = idmapaMigracao;
+                        ObjMapaSurdo.idSurdo = item.idSurdo;
+                        dbMpContex.MapaSurdo.Add(ObjMapaSurdo);
+                        dbMpContex.SaveChanges();
+                    }
+
+                    //var mapexcluir = dbMpContex.MapaSurdo.Where(msd => msd.idMapa == idmaparet);
+
+                    dbMpContex.Database.ExecuteSqlCommand("DELETE FROM mapasurdo where idmapa = {0}", idmaparet);
+                    dbMpContex.SaveChanges();
+                    //dbMpContex.Entry(dbMpContex.MapaSurdo.Where(msd => msd.idMapa == idmaparet).ToList()).State = System.Data.Entity.EntityState.Deleted;
+                    //dbMpContex.SaveChanges();
+
+                    //var excluirmapa = dbMpContex.Mapas.Where(m => m.id == idmaparet).FirstOrDefault();
+
+                    //dbMpContex.Entry(excluirmapa).State = System.Data.Entity.EntityState.Deleted;
+
+                    dbMpContex.Database.ExecuteSqlCommand("Delete From mapas where id = {0}", idmaparet);
+
+                    dbMpContex.SaveChanges();
+                    
+                    return RedirectToAction("index");
+                }
+
+                ViewBag.Erro = "Dados informados em branco";
+
+                return View();
+            }
+            catch (Exception ex)
             {
                 return View();
             }
         }
+
 
         // GET: Mapa/Delete/5
         public ActionResult Delete(int id)
@@ -165,7 +242,7 @@ namespace LsMapasNet.Controllers
 
         public ActionResult ExcluirSurdoMapa(string idsurdo)
         {
-            
+
             try
             {
                 var retidsurdo = Convert.ToInt32(idsurdo);
@@ -177,7 +254,7 @@ namespace LsMapasNet.Controllers
                 dbMpContex.Entry(ObjMapaSurdo).State = System.Data.Entity.EntityState.Deleted;
                 dbMpContex.SaveChanges();
 
-                return RedirectToAction("IncluirSurdoMapa", new { idmapa= id });
+                return RedirectToAction("IncluirSurdoMapa", new { idmapa = id });
             }
             catch (Exception ex)
             {

@@ -120,3 +120,6 @@ C:\Users\dp\Documents\Sistemas\LsMapasNet\LsMapasNet\obj\Debug\LsMapasNet.pdb
 C:\Users\dp\Documents\Sistemas\LsMapasNet\LsMapasNet\obj\Debug\LsMapasNet.Migrations.Initial.resources
 C:\Users\dp\Documents\Sistemas\LsMapasNet\LsMapasNet\obj\Debug\LsMapasNet.csproj.GenerateResource.Cache
 C:\Sistemas\LsMapasNet\LsMapasNet\obj\Debug\LsMapasNet.Migrations.Initial.resources
+C:\Sistemas\LsMapasNet\LsMapasNet\bin\EntityFramework.Extended.dll
+C:\Sistemas\LsMapasNet\LsMapasNet\bin\EntityFramework.Extended.xml
+C:\Sistemas\LsMapasNet\LsMapasNet\bin\MySqlBackup.dll
