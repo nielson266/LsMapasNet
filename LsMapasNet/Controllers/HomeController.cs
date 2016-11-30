@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LsMapasNet.Contexto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,8 +9,15 @@ namespace LsMapasNet.Controllers
 {
     public class HomeController : Controller
     {
+
+        private LsMapaContext dbMpContex = new LsMapaContext();
         public ActionResult Index()
         {
+            if (!dbMpContex.Database.Exists())
+            {
+                return RedirectToAction("DatabaseErro", "Configuracao");
+            }
+
             return View();
         }
 

@@ -1,4 +1,5 @@
-﻿using LsMapasNet.Models;
+﻿using LsMapasNet.Contexto;
+using LsMapasNet.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,9 @@ namespace LsMapasNet.Controllers
         // GET: Configuracao
 
         Backup ObjBackup;
+
+        private LsMapaContext dbMpContex = new LsMapaContext();
+
         public ActionResult Backup()
         {
             return View();
@@ -46,6 +50,29 @@ namespace LsMapasNet.Controllers
             byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\Backups\backup.sql");
             string fileName = "backup.sql";
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
+
+        public ActionResult DatabaseErro()
+        {
+            return View();
+        }
+        public JsonResult CreateDataBase()
+        {
+            List<string> ListRetorno = new List<string>();
+            try
+            {
+                dbMpContex.Database.Initialize(true);
+                ListRetorno.Add("OK");
+                ListRetorno.Add("CRIADO COM SUCESSO");
+                return Json(ListRetorno, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception Ex)
+            {
+                ListRetorno.Add("ERRO");
+                ListRetorno.Add(Ex.Message.ToString());
+                return Json(ListRetorno,JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Database Erro";
+}
+
+<div class="container">
+    <h5 class="amber-text text-darken-4">Base de Dados não existe, e está sendo criada, isso pode demorar um pouco</h5>
+</div>
+
+
+@section Scriptsoutros
+{
+    <script type="text/javascript">
+        $(function () {
+            $.get("/configuracao/CreateDataBase", function (data) {
+                if (data[0] == 'OK') {
+                    alert(data[1]);
+                }
+                else {
+                    alert(data[1]);
+                }
+                window.location.href = '/home/index';
+            });
+        })
+    </script>
+}
+
+
