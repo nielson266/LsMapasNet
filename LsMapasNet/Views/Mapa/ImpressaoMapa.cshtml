@@ -82,7 +82,7 @@
 	var id = document.getElementById("btnhiddenidmapa").value
 
 	function initMap() {
-	  $.get('/mapa/imprimir_listalatlongmapa/' + id +"/", function(dt){
+	    $.get('/lsmapas/mapa/imprimir_listalatlongmapa/' + id + "/", function (dt) {
 	      console.log(dt[0]['centlat'])
 	      var lat = dt[0]['centlat']
 	      var long = dt[0]['centlong']

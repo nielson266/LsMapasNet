@@ -17,7 +17,7 @@
 {
     <script type="text/javascript">
         $("#btnBackup").click(function () {
-            $.get("/configuracao/backupjson", function (data) {
+            $.get("/lsmapas/configuracao/backupjson", function (data) {
                 console.log(data);
                 if (data[0] == 'OK') {
                     $("#caminho").val(data[1]);

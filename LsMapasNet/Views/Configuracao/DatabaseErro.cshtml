@@ -12,14 +12,14 @@
 {
     <script type="text/javascript">
         $(function () {
-            $.get("/configuracao/CreateDataBase", function (data) {
+            $.get("/lsmapas/configuracao/CreateDataBase", function (data) {
                 if (data[0] == 'OK') {
                     alert(data[1]);
                 }
                 else {
                     alert(data[1]);
                 }
-                window.location.href = '/home/index';
+                window.location.href = '/lsmapas/home/index';
             });
         })
     </script>
