@@ -11,6 +11,11 @@
 
     @using (Html.BeginForm())
     {
+
+        @if(ViewBag.Erro != "")
+        {
+
+        }
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">

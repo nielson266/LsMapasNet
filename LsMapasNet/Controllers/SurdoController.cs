@@ -12,10 +12,11 @@ namespace LsMapasNet.Controllers
     {
         private LsMapaContext dbMpContex = new LsMapaContext();
         List<Surdo> ObjList;
+
+        #region ------- INDEX -------
         // GET: Surdo
         public ActionResult Index(string SearchSurdo)
         {
-            //var listSurdo = dbMpContex.Surdo.ToList();
             try
             {
                 ObjList = new List<Surdo>();
@@ -25,158 +26,67 @@ namespace LsMapasNet.Controllers
                 {
                     ObjList = ObjList.Where(c => c.nome.Contains(SearchSurdo)).ToList();
                 }
-                    
 
-
-                    //LerArquivo();
-                    return View(ObjList);
+                return View(ObjList);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message.ToString());
             }
         }
+        #endregion
 
+        #region ------- DETAILS -------
         // GET: Surdo/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return RedirectToAction("INDEX");
         }
+        #endregion
 
+        #region ------- CREATE -------
         // GET: Surdo/Create
         public ActionResult Create()
         {
-
-            List<SelectListItem> ListStatus = new List<SelectListItem>();
-            ListStatus.Add(new SelectListItem
-            {
-                Text = "Ativo",
-                Value = "A"
-            });
-            ListStatus.Add(new SelectListItem
-            {
-                Text = "Mundou-se",
-                Value = "M"
-            });
-            ListStatus.Add(new SelectListItem
-            {
-                Text = "Não Visitar",
-                Value = "N"
-            });
-
-            ViewBag.ListStatus = ListStatus;
+            ViewBag.ListStatus = ListStatus();
             return View();
         }
-
         // POST: Surdo/Create
         [HttpPost]
         public ActionResult Create(Surdo collection, string ListStatus)
         {
             try
             {
-                //if (ListStatus != string.Empty)
-                //{
-                //    collection.status = ListStatus;
-                //}
-
-
-
-                // TODO: Add insert logic here
                 if (ModelState.IsValid)
                 {
-                    collection.id = dbMpContex.Surdo.Max(s => s.id) + 1;
+                    int id = dbMpContex.Surdo.Select(s => s.id).DefaultIfEmpty(0).Max();
+
+                    collection.id = dbMpContex.Surdo.Select(s => s.id).DefaultIfEmpty(0).Max() + 1;
                     dbMpContex.Surdo.Add(collection);
                     dbMpContex.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                List<SelectListItem> ListStatusCbo = new List<SelectListItem>();
-                ListStatusCbo.Add(new SelectListItem
-                {
-                    Text = "Ativo",
-                    Value = "A"
-                });
-                ListStatusCbo.Add(new SelectListItem
-                {
-                    Text = "Mundou-se",
-                    Value = "M"
-                });
-                ListStatusCbo.Add(new SelectListItem
-                {
-                    Text = "Não Visitar",
-                    Value = "N"
-                });
 
-                ViewBag.ListStatus = ListStatusCbo;
-
+                ViewBag.ListStatus = ListStatus;
+                ViewBag.Erro = string.Empty;
                 return View(collection);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                ViewBag.ListStatus = ListStatus;
+                ViewBag.Erro = ex.Message.ToString();
                 return View();
             }
         }
+        #endregion
 
+        #region ------- EDITAR -------
         // GET: Surdo/Edit/5
         public ActionResult Edit(int id)
         {
-            List<SelectListItem> ListStatus = new List<SelectListItem>();
-
             var RetSurdo = dbMpContex.Surdo.Where(s => s.id == id).First();
 
-            if (RetSurdo.status == "A")
-            {
-                ListStatus.Add(new SelectListItem
-                {
-                    Text = "Ativo",
-                    Value = "A",
-                    Selected = true,
-                });
-            }
-            else
-            {
-                ListStatus.Add(new SelectListItem
-                {
-                    Text = "Ativo",
-                    Value = "A"
-                });
-            }
-            if (RetSurdo.status == "M")
-            {
-                ListStatus.Add(new SelectListItem
-                {
-                    Text = "Mundou-se",
-                    Value = "M",
-                    Selected = true
-                });
-            }
-            else
-            {
-                ListStatus.Add(new SelectListItem
-                {
-                    Text = "Mundou-se",
-                    Value = "M"
-                });
-            }
-
-            if (RetSurdo.status == "N")
-            {
-                ListStatus.Add(new SelectListItem
-                {
-                    Text = "Não Visitar",
-                    Value = "N",
-                    Selected = true
-                });
-            }
-            else
-            {
-                ListStatus.Add(new SelectListItem
-                {
-                    Text = "Não Visitar",
-                    Value = "N"
-                });
-            }
-
-            ViewBag.ListStatus = ListStatus;
+            ViewBag.ListStatus = ListStatus(RetSurdo.status);
 
             return View(RetSurdo); ;
         }
@@ -187,8 +97,6 @@ namespace LsMapasNet.Controllers
         {
             try
             {
-                List<SelectListItem> ListStatus = new List<SelectListItem>();
-
                 if (ModelState.IsValid)
                 {
                     dbMpContex.Entry(ObjSurdo).State = System.Data.Entity.EntityState.Modified;
@@ -197,75 +105,26 @@ namespace LsMapasNet.Controllers
 
                     return RedirectToAction("Index");
                 }
-                else
-                {
-                    if (ObjSurdo.status == "A")
-                    {
-                        ListStatus.Add(new SelectListItem
-                        {
-                            Text = "Ativo",
-                            Value = "A",
-                            Selected = true,
-                        });
-                    }
-                    else
-                    {
-                        ListStatus.Add(new SelectListItem
-                        {
-                            Text = "Ativo",
-                            Value = "A"
-                        });
-                    }
-                    if (ObjSurdo.status == "M")
-                    {
-                        ListStatus.Add(new SelectListItem
-                        {
-                            Text = "Mundou-se",
-                            Value = "M",
-                            Selected = true
-                        });
-                    }
-                    else
-                    {
-                        ListStatus.Add(new SelectListItem
-                        {
-                            Text = "Mundou-se",
-                            Value = "M"
-                        });
-                    }
 
-                    if (ObjSurdo.status == "N")
-                    {
-                        ListStatus.Add(new SelectListItem
-                        {
-                            Text = "Não Visitar",
-                            Value = "N",
-                            Selected = true
-                        });
-                    }
-                    else
-                    {
-                        ListStatus.Add(new SelectListItem
-                        {
-                            Text = "Não Visitar",
-                            Value = "N"
-                        });
-                    }
+                ViewBag.ListStatus = ListStatus(ObjSurdo.status);
+                ViewBag.Erro = string.Empty;
 
-                    ViewBag.ListStatus = ListStatus;
-                }
                 return View();
             }
-            catch(Exception Ex)
+            catch (Exception ex)
             {
+                ViewBag.ListStatus = ListStatus(ObjSurdo.status);
+                ViewBag.Erro = ex.Message.ToString();
                 return View();
             }
         }
+        #endregion
 
+        #region ------- DELETE -------
         // GET: Surdo/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return RedirectToAction("Index");
         }
 
         // POST: Surdo/Delete/5
@@ -283,12 +142,14 @@ namespace LsMapasNet.Controllers
                 return View();
             }
         }
+        #endregion
 
+        #region ------- LER ARQUIVO -------
         void LerArquivo()
         {
             int counter = 0;
             string line;
-            System.IO.StreamReader file =  new System.IO.StreamReader(@"C:\Users\dp\Documents\Sistemas\LsMapasNet\LsMapasNet\arquivos\scriptSurdo.txt");
+            System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Users\dp\Documents\Sistemas\LsMapasNet\LsMapasNet\arquivos\scriptSurdo.txt");
 
 
             while ((line = file.ReadLine()) != null)
@@ -300,7 +161,7 @@ namespace LsMapasNet.Controllers
 
                 ObjSurdo.id = Convert.ToInt32(surdolinha[1]);
 
-                if(Convert.ToInt32(surdolinha[1]) == 279)
+                if (Convert.ToInt32(surdolinha[1]) == 279)
                     counter++;
                 ObjSurdo.nome = surdolinha[2];
                 ObjSurdo.endereco = surdolinha[3];
@@ -316,10 +177,93 @@ namespace LsMapasNet.Controllers
 
                 counter++;
             }
-
-
             counter++;
-
         }
+        #endregion
+
+        #region ------- LISTA DE STATUS -------
+        public List<SelectListItem> ListStatus()
+        {
+            List<SelectListItem> LstStatus = new List<SelectListItem>();
+
+            LstStatus.Add(new SelectListItem
+            {
+                Text = "Ativo",
+                Value = "A"
+            });
+            LstStatus.Add(new SelectListItem
+            {
+                Text = "Mundou-se",
+                Value = "M"
+            });
+            LstStatus.Add(new SelectListItem
+            {
+                Text = "Não Visitar",
+                Value = "N"
+            });
+
+            return LstStatus;
+        }
+
+        public List<SelectListItem> ListStatus(string status)
+        {
+            List<SelectListItem> LstStatus = new List<SelectListItem>();
+
+            if (status == "A")
+            {
+                LstStatus.Add(new SelectListItem
+                {
+                    Text = "Ativo",
+                    Value = "A",
+                    Selected = true,
+                });
+            }
+            else
+            {
+                LstStatus.Add(new SelectListItem
+                {
+                    Text = "Ativo",
+                    Value = "A"
+                });
+            }
+            if (status == "M")
+            {
+                LstStatus.Add(new SelectListItem
+                {
+                    Text = "Mundou-se",
+                    Value = "M",
+                    Selected = true
+                });
+            }
+            else
+            {
+                LstStatus.Add(new SelectListItem
+                {
+                    Text = "Mundou-se",
+                    Value = "M"
+                });
+            }
+
+            if (status == "N")
+            {
+                LstStatus.Add(new SelectListItem
+                {
+                    Text = "Não Visitar",
+                    Value = "N",
+                    Selected = true
+                });
+            }
+            else
+            {
+                LstStatus.Add(new SelectListItem
+                {
+                    Text = "Não Visitar",
+                    Value = "N"
+                });
+            }
+
+            return LstStatus;
+        }
+        #endregion
     }
 }

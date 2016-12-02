@@ -17,10 +17,42 @@ namespace LsMapasNet.Controllers
 
         private LsMapaContext dbMpContex = new LsMapaContext();
 
+        #region ---- BACKUP ----
         public ActionResult Backup()
         {
             return View();
         }
+
+        public JsonResult BackupJson()
+        {
+            ObjBackup = new Models.Backup();
+            string patharquivo = string.Empty;
+            List<string> objRet = new List<string>();
+
+            if (ObjBackup.BackupDataBase(out patharquivo))
+            {
+                objRet.Add("OK");
+                objRet.Add(patharquivo);
+
+
+                return Json(objRet, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                objRet.Add("Erro");
+                return Json(objRet, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public FileResult Download()
+        {
+            byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\Backups\backup.sql");
+            string fileName = "backup.sql";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
+        #endregion
+
+        #region ---- RESTAURAR ----
         public ActionResult Restaurar()
         {
             return View();
@@ -61,44 +93,33 @@ namespace LsMapasNet.Controllers
                 }
                 catch (Exception ex)
                 {
-                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                    ViewBag.Erro = "ERROR:" + ex.Message.ToString();
                 }
             }
             else
             {
-                ViewBag.Message = "You have not specified a file.";
+                ViewBag.Erro = "NÃO FOI SELECIONADO NENHUM ARQUIVO";
             }
             return View();
         }
 
-        public JsonResult BackupJson()
+        public void CriarPastaRestauracao()
         {
-            ObjBackup = new Models.Backup();
-            string patharquivo = string.Empty;
-            List<string> objRet = new List<string>();
-
-            if (ObjBackup.BackupDataBase(out patharquivo))
+            if (!Directory.Exists(Server.MapPath("~/restauracao")))
             {
-                objRet.Add("OK");
-                objRet.Add(patharquivo);
-
-
-                return Json(objRet, JsonRequestBehavior.AllowGet);
+                Directory.CreateDirectory(Server.MapPath("~/restauracao"));
             }
             else
             {
-                objRet.Add("Erro");
-                return Json(objRet, JsonRequestBehavior.AllowGet);
+                Directory.Delete(Server.MapPath("~/restauracao"), true);
+                Directory.CreateDirectory(Server.MapPath("~/restauracao"));
             }
-        }
-        public FileResult Download()
-        {
-            byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\Backups\backup.sql");
-            string fileName = "backup.sql";
-            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+
         }
 
+        #endregion
 
+        #region ---- DATABASE ERRO - Base não existe ----
         public ActionResult DatabaseErro()
         {
             return View();
@@ -120,19 +141,6 @@ namespace LsMapasNet.Controllers
                 return Json(ListRetorno,JsonRequestBehavior.AllowGet);
             }
         }
-
-        public void CriarPastaRestauracao()
-        {
-            if (!Directory.Exists(Server.MapPath("~/restauracao")))
-            {
-                Directory.CreateDirectory(Server.MapPath("~/restauracao"));
-            }
-            else
-            {
-                Directory.Delete(Server.MapPath("~/restauracao"),true);
-                Directory.CreateDirectory(Server.MapPath("~/restauracao"));
-            }
-            
-        }
+        #endregion
     }
 }

@@ -1,6 +1,6 @@
 ﻿$(function () {
 
-    $.get("/mapa/dropdownlistsurdo", function (dados) {
+    $.get("/lsmapas/mapa/dropdownlistsurdo", function (dados) {
         console.log(dados);
         var options = {
             data: dados,
@@ -26,11 +26,11 @@ $("#btnIncluirMapaSurdo").click(function () {
     else {
         var idmapa = $("#IdMapa").val();
         var idselectsurdo = $("#surdoNome").val();
-        $.post("/mapa/IncluirSurdoMapaJson", { IdMapa: idmapa, SelectIdSurdo: idselectsurdo }, function (data) {
-            $.get("/mapa/_listasurdomapa", { id: idmapa }, function (data) {
+        $.post("/lsmapas/mapa/IncluirSurdoMapaJson", { IdMapa: idmapa, SelectIdSurdo: idselectsurdo }, function (data) {
+            $.get("/lsmapas//mapa/_listasurdomapa", { id: idmapa }, function (data) {
                 $("#dvListaSurdoMapa").html(data);
             });
-            $.get("/mapa/dropdownlistsurdo", function (dados) {
+            $.get("/lsmapas/mapa/dropdownlistsurdo", function (dados) {
                 var options = {
                     data: dados,
                     list: {

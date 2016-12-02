@@ -11,21 +11,24 @@ namespace LsMapasNet.Controllers
     public class MapaController : Controller
     {
         private LsMapaContext dbMpContex = new LsMapaContext();
+
+        #region ---- INDEX ----
         // GET: Mapa
         public ActionResult Index()
         {
-            //CarregaMapaScript();
-            //CarregaMapaSurdoScript();
-
             return View(dbMpContex.Mapas.ToList());
         }
+        #endregion
 
+        #region ---- Details ----
         // GET: Mapa/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return RedirectToAction("index");
         }
+        #endregion
 
+        #region ---- CREATE ----
         // GET: Mapa/Create
         public ActionResult Create()
         {
@@ -44,16 +47,19 @@ namespace LsMapasNet.Controllers
                     dbMpContex.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                else
-                    return View(ObjMapa);
 
+                ViewBag.Erro = string.Empty;
+                return View(ObjMapa);
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
+                ViewBag.Erro = ex.Message.ToString();
                 return View(ObjMapa);
             }
         }
+        #endregion
 
+        #region ---- EDITAR ----
         // GET: Mapa/Edit/5
         public ActionResult Edit(int id)
         {
@@ -73,14 +79,18 @@ namespace LsMapasNet.Controllers
                     dbMpContex.SaveChanges();
                     return RedirectToAction("Index");
                 }
+                ViewBag.Erro = string.Empty;
                 return View(ObjMapa);
             }
-            catch
+            catch(Exception ex)
             {
+                ViewBag.Erro = ex.Message.ToString();
                 return View(ObjMapa);
             }
         }
+        #endregion
 
+        #region ---- MIGRAÇÃO ----
         public ActionResult Migracao()
         {
             var listamap = dbMpContex.Mapas.ToList();
@@ -124,21 +134,13 @@ namespace LsMapasNet.Controllers
                         dbMpContex.SaveChanges();
                     }
 
-                    //var mapexcluir = dbMpContex.MapaSurdo.Where(msd => msd.idMapa == idmaparet);
-
                     dbMpContex.Database.ExecuteSqlCommand("DELETE FROM mapasurdo where idmapa = {0}", idmaparet);
                     dbMpContex.SaveChanges();
-                    //dbMpContex.Entry(dbMpContex.MapaSurdo.Where(msd => msd.idMapa == idmaparet).ToList()).State = System.Data.Entity.EntityState.Deleted;
-                    //dbMpContex.SaveChanges();
-
-                    //var excluirmapa = dbMpContex.Mapas.Where(m => m.id == idmaparet).FirstOrDefault();
-
-                    //dbMpContex.Entry(excluirmapa).State = System.Data.Entity.EntityState.Deleted;
 
                     dbMpContex.Database.ExecuteSqlCommand("Delete From mapas where id = {0}", idmaparet);
 
                     dbMpContex.SaveChanges();
-                    
+
                     return RedirectToAction("index");
                 }
 
@@ -148,28 +150,34 @@ namespace LsMapasNet.Controllers
             }
             catch (Exception ex)
             {
+                ViewBag.Erro = ex.Message.ToString();
                 return View();
             }
         }
 
+        #endregion
 
+        #region ---- DELETE ----
         // GET: Mapa/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return RedirectToAction("index");
         }
+        #endregion
 
+        #region ---- IMPRESSAO MAPA ----
         public ActionResult ImpressaoMapa(int id)
         {
-
             var DtListMapa = dbMpContex.MapaSurdo.Where(m => m.idMapa == id).ToList();
 
             ViewBag.idMapa = id;
             ViewBag.Mapa = DtListMapa[0].id_mapa.desc_mapa;
-
-
+            
             return View(DtListMapa);
         }
+        #endregion
+
+        #region ---- INCLUIR SURDO AO MAPA ----
 
         public ActionResult IncluirSurdoMapa(int? idmapa)
         {
@@ -186,6 +194,9 @@ namespace LsMapasNet.Controllers
             return View();
         }
 
+        #endregion
+
+        #region ---- INCLUIR SURDO AO MAPA - JSON ----
         public ActionResult IncluirSurdoMapaJson(string IdMapa, string SelectIdSurdo)
         {
 
@@ -213,11 +224,19 @@ namespace LsMapasNet.Controllers
             return Json("OK");
         }
 
+        #endregion
+
+        #region ---- LISTA SURDO MAPA - PARTIAL VIEW ----
+
         public PartialViewResult _listasurdomapa(int id)
         {
             ViewBag.Mapa = dbMpContex.Mapas.Where(m => m.id == id).Select(s => s.desc_mapa).First();
             return PartialView(dbMpContex.MapaSurdo.Where(ms => ms.idMapa == id).ToList());
         }
+
+        #endregion
+
+        #region ---- DROPDOWN LISTA DE SURDO - JSON ----
 
         public JsonResult dropdownlistsurdo()
         {
@@ -226,19 +245,19 @@ namespace LsMapasNet.Controllers
                             where !dbMpContex.MapaSurdo.Any(ms => (ms.idSurdo == s.id)) && (!listbairros.Contains(s.bairro))
                             orderby s.nome
                             select new { s.id, nome = s.nome + " | " + s.bairro };
-
-
-
+            
             List<string> dados = new List<string>();
 
             foreach (var item in ListSurdo)
             {
                 dados.Add(item.nome);
             }
-
             return Json(dados, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
+
+        #region ---- EXCLUIR SURDO MAPA ----
 
         public ActionResult ExcluirSurdoMapa(string idsurdo)
         {
@@ -262,11 +281,9 @@ namespace LsMapasNet.Controllers
             }
         }
 
-        public ActionResult DeleteSurdoMapa(int id)
-        {
-            return View();
-        }
+        #endregion
 
+        #region ---- IMPRIMIR SELECT MAPA SURDO POR ID ----
         public ActionResult imprimir_listalatlongmapa(int id)
         {
 
@@ -300,22 +317,9 @@ namespace LsMapasNet.Controllers
             return Json(dados, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: Mapa/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+        #endregion
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
+        #region --- CARREGA DADOS POR ARQUIVOS
         void CarregaMapaScript()
         {
             int counter = 0;
@@ -380,5 +384,6 @@ namespace LsMapasNet.Controllers
                 counter++;
             }
         }
+        #endregion
     }
 }
