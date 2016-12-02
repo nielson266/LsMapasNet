@@ -39,15 +39,15 @@ namespace LsMapasNet
             bundles.Add(new ScriptBundle("~/bundles/easycomplete").Include(
                       "~/Scripts/easycomplete/easy-autocomplete.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/jquery-ui.css",
-                      "~/Content/jquery-ui.theme.css",
-                      "~/Content/site.css"));
+            //bundles.Add(new StyleBundle("~/Content/css").Include(
+            //          "~/Content/jquery-ui.css",
+            //          "~/Content/jquery-ui.theme.css",
+            //          "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/materializecss").Include(
-                      "~/Content/materializecss/css/materialize.min.css"));
+                      "~/Content/materializecss/materialize.css"));
 
-            bundles.Add(new StyleBundle("~/Content/easycomplete").Include(
+            bundles.Add(new StyleBundle("~/Content/easycomplete/css").Include(
                       "~/Content/easycomplete/easy-autocomplete.css", "~/Content/easycomplete/easy-autocomplete.themes.css"));
         }
     }

@@ -204,8 +204,7 @@
     <Content Include="Content\easycomplete\easy-autocomplete.themes.css" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery-ui.theme.css" />
-    <Content Include="Content\materializecss\css\materialize.css" />
-    <Content Include="Content\materializecss\css\materialize.min.css" />
+    <Content Include="Content\materializecss\materialize.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -215,27 +214,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Bold.eot" />
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Bold.ttf" />
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Bold.woff" />
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Bold.woff2" />
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Light.eot" />
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Light.ttf" />
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Light.woff" />
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Light.woff2" />
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Medium.eot" />
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Medium.ttf" />
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Medium.woff" />
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Medium.woff2" />
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Regular.eot" />
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Regular.ttf" />
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Regular.woff" />
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Regular.woff2" />
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Thin.eot" />
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Thin.ttf" />
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Thin.woff" />
-    <Content Include="Content\materializecss\fonts\roboto\Roboto-Thin.woff2" />
-    <Content Include="Content\materializecss\LICENSE" />
     <None Include="Properties\PublishProfiles\LSCaucaia.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\easycomplete\easy-autocomplete.js" />

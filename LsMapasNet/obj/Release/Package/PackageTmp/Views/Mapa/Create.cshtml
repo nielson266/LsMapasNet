@@ -4,7 +4,6 @@
     ViewBag.Title = "Criar Novo Mapa";
 }
 
-<<<<<<< HEAD
 
 <div class="container">
 
@@ -62,58 +61,3 @@
         @Html.ActionLink("Back to List", "Index")
     </div>
 </div>
-=======
-<h5>Criar Novo Mapa</h5>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        <div class="row">
-            <div class="input-field col s4 m4 l4">
-                <label for="desc_mapa">Código</label>
-                @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "validate" } })
-                @Html.ValidationMessageFor(model => model.id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="input-field col s4 m4 l4">
-                <label for="desc_mapa">Nome</label>
-                @Html.EditorFor(model => model.desc_mapa, new { htmlAttributes = new { @class = "validate" } })
-                @Html.ValidationMessageFor(model => model.desc_mapa, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="input-field col s6 m6 l6">
-                <label for="obs">Obs</label>
-                @Html.TextAreaFor(model => model.obs, new { @class = "materialize-textarea" } )
-                @Html.ValidationMessageFor(model => model.obs, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="input-field col s2 m2 l2">
-                <label for="zoommapa">Zoom Mapa</label>
-                @Html.EditorFor(model => model.zoommapa, new { htmlAttributes = new { @class = "validate" } })
-                @Html.ValidationMessageFor(model => model.zoommapa, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Salvar" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
->>>>>>> origin/master
