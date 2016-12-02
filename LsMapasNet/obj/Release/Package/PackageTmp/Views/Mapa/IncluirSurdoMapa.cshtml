@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Incluir Surdo ao Mapa";
+}
+
+<h5>Incluir Surdo ao Mapa</h5>
+
+@Html.Hidden("IdMapa")
+
+<div class="container">
+    <div class="row">
+        <div class="col s4 m10 l10">
+            <div class="input-field col s12 m8 l10">
+                @*<input placeholder="Placeholder" id="first_name" type="text" class="validate">*@
+                <input type="text" id="surdoNome" name="surdoNome" placeholder="Digite um nome">
+            </div>
+        </div>
+        <div class="col s4 m2 l2">
+            <div style="padding-top:7px">
+                <div class="input-field col s12 m4 l2">
+                    <a id="btnIncluirMapaSurdo" class="waves-effect waves-light btn-large"><i class="material-icons center">add</i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dvListaSurdoMapa">
+
+        @{
+
+            Html.RenderPartial("_listasurdomapa", (object)ViewBag.ListMapaSurdo);
+        }
+
+    </div>
+</div>
+
+@section Scriptsoutros
+{
+    @Scripts.Render("~/bundles/lsmapasjs")
+}

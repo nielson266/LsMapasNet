@@ -4,80 +4,91 @@
     ViewBag.Title = "Lista de Surdos Cadastrados";
 }
 
-<h2>Lista de Surdos Cadastrados</h2>
 
 
-@using (Html.BeginForm("index", "surdo", FormMethod.Post, new { @class = "form-inline" }))
-{
-    <div class="form-group">
-        <label for="exampleInputName2">Name:</label>
-        @Html.TextBox("SearchSurdo", string.Empty, new { @class = "form-control" })
-    </div>
-    <input type="submit" value="Buscar" class="btn btn-default" />
-}
-<p>
-    @Html.ActionLink("Novo", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.endereco)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.perimetro)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.classe)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.latitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.longitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.bairro)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.status)
-        </th>
-        <th></th>
-    </tr>
+@*<div class="fixed-action-btn">
+        <a class="btn-floating btn-large red">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>*@
 
-    @foreach (var item in Model)
-            {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.endereco)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.perimetro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.classe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.latitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.longitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.bairro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.status)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.id })
-            </td>
-        </tr>
+<div class="container">
+    <h3 class="center-align">Lista de Surdos Cadastrados</h3>
+
+    @using (Html.BeginForm("index", "surdo", FormMethod.Post, new { @class = "form-inline" }))
+    {
+
+        <div class="row">
+            <div class="col s12 m10 l10">
+                <div class="input-field inline">
+                    @Html.TextBox("SearchSurdo", string.Empty, new { placeholder = "Pesquisa" })
+                </div>
+                <button type="submit" class="waves-effect waves-light btn">Buscar</button>
+            </div>
+            <div class="col s12 m2 l2" style="padding-top:17px">
+                <a href=@Url.Action("Create","Surdo")  class="btn-floating btn waves-effect waves-light red right"><i class="material-icons">add</i></a>
+            </div>
+        </div>
     }
+    @*<p>
+            @Html.ActionLink("Novo", "Create")
+        </p>*@
 
-</table>
+    <table class="table ">
+        <tr class="blue-grey darken-4">
+            <th class="white-text text-white">
+                Nome
+            </th>
+            <th class="white-text text-white">
+                Endereço
+            </th>
+            <th class="white-text text-white">
+                Perimentro
+            </th>
+            <th class="white-text text-white">
+                Latitude
+            </th>
+            <th class="white-text text-white">
+                Longitude
+            </th>
+            <th class="white-text text-white">
+                Bairro
+            </th>
+            <th class="white-text text-white">
+                Status
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr class="blue-grey lighten-5">
+                <td>
+                    @Html.DisplayFor(modelItem => item.nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endereco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.perimetro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.latitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.longitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.bairro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>
+                <td>
+                    <a href=@Url.Action("Edit","Surdo",new { id = @item.id }) class="btn-floating btn waves-effect waves-light amber darken-4"><i class="material-icons">mode_edit</i></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
