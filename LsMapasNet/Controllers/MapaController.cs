@@ -157,6 +157,13 @@ namespace LsMapasNet.Controllers
 
         #endregion
 
+        public ActionResult SurdoCentral(int idmapa, int idsurdo)
+        {
+            var objms = dbMpContex.Surdo.Where(ms => ms.id == idsurdo).FirstOrDefault();
+
+
+        }
+
         #region ---- DELETE ----
         // GET: Mapa/Delete/5
         public ActionResult Delete(int id)

@@ -8,6 +8,7 @@
             <div>
                 @item.id_surdo.nome
                 <a href=@Url.Action("ExcluirSurdoMapa","Mapa",new { idsurdo = @item.id }) class="secondary-content"><i class="Medium pink-text  text-darken-3 material-icons">delete_forever</i></a>
+                <a href=@Url.Action("SurdoCentral","Mapa",new { id = @item.id, idsurdo = @item.idSurdo }) class="secondary-content"><i class="Medium pink-text  text-darken-3 material-icons">delete_forever</i></a>
             </div>
         </li>
     }
